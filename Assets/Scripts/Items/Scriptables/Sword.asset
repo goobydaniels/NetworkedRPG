@@ -16,4 +16,5 @@ MonoBehaviour:
   type: 0
   rarity: 0
   damage: 4
-  durability: 0
+  durability: 12
+  statusEffect: 1
