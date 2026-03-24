@@ -25,6 +25,13 @@ namespace Quantum {
 #endif
 
       Quantum.Input i = new Quantum.Input();
+
+      Vector3 dir = new();
+      dir.x = UnityEngine.Input.GetAxisRaw("Horizontal");
+      dir.z = UnityEngine.Input.GetAxisRaw("Vertical");
+
+      i.Direction = dir.ToFPVector3();
+
       callback.SetInput(i, DeterministicInputFlags.Repeatable);
     }
   }
