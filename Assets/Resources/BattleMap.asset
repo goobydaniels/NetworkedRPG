@@ -48,14 +48,14 @@ MonoBehaviour:
     - rid: 3023449913863176194
     - rid: 3023449913863176195
   - Components:
-    - rid: 7662599187984285696
-    - rid: 7662599187984285697
-    - rid: 7662599187984285698
-    - rid: 7662599187984285699
-  - Components:
     - rid: 4421045088163987456
     - rid: 4421045088163987457
     - rid: 4421045088163987458
+  - Components:
+    - rid: 8258251381027110912
+    - rid: 8258251381027110913
+    - rid: 8258251381027110914
+    - rid: 8258251381027110915
   SerializedTriangleDataUncompressedSize: 8
   references:
     version: 2
@@ -252,16 +252,16 @@ MonoBehaviour:
       data:
         CallbackFlags:
           Value: 0
-    - rid: 7662599187984285696
+    - rid: 8258251381027110912
       type: {class: Transform3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
         Position:
           X:
-            RawValue: 0
+            RawValue: 38471
           Y:
-            RawValue: 140247
+            RawValue: 135004
           Z:
-            RawValue: 972554
+            RawValue: 1038359
         Rotation:
           X:
             RawValue: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
             RawValue: 0
           Z:
             RawValue: 0
-    - rid: 7662599187984285697
+    - rid: 8258251381027110913
       type: {class: PhysicsCollider3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
         ShapeConfig:
@@ -309,7 +309,7 @@ MonoBehaviour:
         PhysicsMaterial:
           Id:
             Value: 0
-    - rid: 7662599187984285698
+    - rid: 8258251381027110914
       type: {class: PhysicsBody3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
         Config:
@@ -377,7 +377,7 @@ MonoBehaviour:
           UserTag: 0
           IsPersistent: 1
           CompoundShapes: []
-    - rid: 7662599187984285699
+    - rid: 8258251381027110915
       type: {class: PhysicsCallbacks3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
         CallbackFlags:

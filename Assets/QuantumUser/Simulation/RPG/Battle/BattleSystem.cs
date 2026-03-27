@@ -22,7 +22,7 @@ namespace Quantum.Battle
 
             UpdateMovement(frame, ref filter, input);
 
-            filter.body3D->AddForce(filter.Transform->Up);
+            // filter.body3D->AddForce(filter.Transform->Up);
         }
 
         // Input is sent every tick and is used for inputs that change frequently and affect the real time gameplay. Examples are movement and button presses. For irregular rare inputs, use commands instead.
@@ -52,6 +52,7 @@ namespace Quantum.Battle
             if (input->Action)
             {
                 filter.body3D->AddLinearImpulse(filter.Transform->Up);
+                Debug.Log("action pressed");
             }
 
             if (input->Confirm)

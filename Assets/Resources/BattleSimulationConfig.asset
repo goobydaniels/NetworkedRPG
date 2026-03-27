@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BattleSimulationConfig
   m_EditorClassIdentifier: Quantum.Simulation::Quantum.SimulationConfig
   Identifier:
-    Path: QuantumUser/Resources/BattleSimulationConfig
+    Path: Resources/BattleSimulationConfig
     Guid:
       Value: 364466635838346326
   Entities:
@@ -26,7 +26,7 @@ MonoBehaviour:
       X:
         RawValue: 0
       Y:
-        RawValue: -655360
+        RawValue: -327680
       Z:
         RawValue: 0
     SolverType: 1

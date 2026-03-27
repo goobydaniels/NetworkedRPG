@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BattleSystemConfig
   m_EditorClassIdentifier: Quantum.Simulation::Quantum.SystemsConfig
   Identifier:
-    Path: QuantumUser/Resources/BattleSystemConfig
+    Path: Resources/BattleSystemConfig
     Guid:
       Value: 351345293547538414
   Entries:
