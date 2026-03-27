@@ -55,6 +55,13 @@ namespace Quantum {
     Right = 1 << 1,
     Up = 1 << 2,
     Fire = 1 << 3,
+    MenuLeft = 1 << 4,
+    MenuRight = 1 << 5,
+    MenuUp = 1 << 6,
+    MenuDown = 1 << 7,
+    Action = 1 << 8,
+    Confirm = 1 << 9,
+    Back = 1 << 10,
   }
   public static unsafe partial class FlagsExtensions {
     public static Boolean IsFlagSet(this InputButtons self, InputButtons flag) {
@@ -515,17 +522,31 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Input {
-    public const Int32 SIZE = 72;
+    public const Int32 SIZE = 160;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(12)]
-    public Button Left;
-    [FieldOffset(24)]
-    public Button Right;
-    [FieldOffset(36)]
-    public Button Up;
-    [FieldOffset(0)]
-    public Button Fire;
     [FieldOffset(48)]
+    public Button Left;
+    [FieldOffset(108)]
+    public Button Right;
+    [FieldOffset(120)]
+    public Button Up;
+    [FieldOffset(36)]
+    public Button Fire;
+    [FieldOffset(72)]
+    public Button MenuLeft;
+    [FieldOffset(84)]
+    public Button MenuRight;
+    [FieldOffset(96)]
+    public Button MenuUp;
+    [FieldOffset(60)]
+    public Button MenuDown;
+    [FieldOffset(0)]
+    public Button Action;
+    [FieldOffset(24)]
+    public Button Confirm;
+    [FieldOffset(12)]
+    public Button Back;
+    [FieldOffset(136)]
     public FPVector3 Direction;
     public override readonly Int32 GetHashCode() {
       unchecked { 
@@ -534,6 +555,13 @@ namespace Quantum {
         hash = hash * 31 + Right.GetHashCode();
         hash = hash * 31 + Up.GetHashCode();
         hash = hash * 31 + Fire.GetHashCode();
+        hash = hash * 31 + MenuLeft.GetHashCode();
+        hash = hash * 31 + MenuRight.GetHashCode();
+        hash = hash * 31 + MenuUp.GetHashCode();
+        hash = hash * 31 + MenuDown.GetHashCode();
+        hash = hash * 31 + Action.GetHashCode();
+        hash = hash * 31 + Confirm.GetHashCode();
+        hash = hash * 31 + Back.GetHashCode();
         hash = hash * 31 + Direction.GetHashCode();
         return hash;
       }
@@ -547,6 +575,13 @@ namespace Quantum {
         case InputButtons.Right: return Right.IsDown;
         case InputButtons.Up: return Up.IsDown;
         case InputButtons.Fire: return Fire.IsDown;
+        case InputButtons.MenuLeft: return MenuLeft.IsDown;
+        case InputButtons.MenuRight: return MenuRight.IsDown;
+        case InputButtons.MenuUp: return MenuUp.IsDown;
+        case InputButtons.MenuDown: return MenuDown.IsDown;
+        case InputButtons.Action: return Action.IsDown;
+        case InputButtons.Confirm: return Confirm.IsDown;
+        case InputButtons.Back: return Back.IsDown;
         default: return false;
       }
     }
@@ -556,13 +591,27 @@ namespace Quantum {
         case InputButtons.Right: return Right.WasPressed;
         case InputButtons.Up: return Up.WasPressed;
         case InputButtons.Fire: return Fire.WasPressed;
+        case InputButtons.MenuLeft: return MenuLeft.WasPressed;
+        case InputButtons.MenuRight: return MenuRight.WasPressed;
+        case InputButtons.MenuUp: return MenuUp.WasPressed;
+        case InputButtons.MenuDown: return MenuDown.WasPressed;
+        case InputButtons.Action: return Action.WasPressed;
+        case InputButtons.Confirm: return Confirm.WasPressed;
+        case InputButtons.Back: return Back.WasPressed;
         default: return false;
       }
     }
     static partial void SerializeCodeGen(void* ptr, FrameSerializer serializer) {
         var p = (Input*)ptr;
+        Button.Serialize(&p->Action, serializer);
+        Button.Serialize(&p->Back, serializer);
+        Button.Serialize(&p->Confirm, serializer);
         Button.Serialize(&p->Fire, serializer);
         Button.Serialize(&p->Left, serializer);
+        Button.Serialize(&p->MenuDown, serializer);
+        Button.Serialize(&p->MenuLeft, serializer);
+        Button.Serialize(&p->MenuRight, serializer);
+        Button.Serialize(&p->MenuUp, serializer);
         Button.Serialize(&p->Right, serializer);
         Button.Serialize(&p->Up, serializer);
         FPVector3.Serialize(&p->Direction, serializer);
@@ -570,9 +619,9 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
-    public const Int32 SIZE = 1056;
+    public const Int32 SIZE = 1584;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(1052)]
+    [FieldOffset(1580)]
     private fixed Byte _alignment_padding_[4];
     [FieldOffset(0)]
     public AssetRef<Map> Map;
@@ -596,14 +645,14 @@ namespace Quantum {
     public Int32 PlayerConnectedCount;
     [FieldOffset(608)]
     [FramePrinter.FixedArrayAttribute(typeof(Input), 6)]
-    private fixed Byte _input_[432];
-    [FieldOffset(1040)]
+    private fixed Byte _input_[960];
+    [FieldOffset(1568)]
     public BitSet6 PlayerLastConnectionState;
-    [FieldOffset(1048)]
+    [FieldOffset(1576)]
     public Int32 AsteroidsWaveCount;
     public readonly FixedArray<Input> input {
       get {
-        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 72, 6); }
+        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 160, 6); }
       }
     }
     public override readonly Int32 GetHashCode() {
@@ -856,6 +905,13 @@ namespace Quantum {
       i->Right = i->Right.Update(this.Number, input.Right);
       i->Up = i->Up.Update(this.Number, input.Up);
       i->Fire = i->Fire.Update(this.Number, input.Fire);
+      i->MenuLeft = i->MenuLeft.Update(this.Number, input.MenuLeft);
+      i->MenuRight = i->MenuRight.Update(this.Number, input.MenuRight);
+      i->MenuUp = i->MenuUp.Update(this.Number, input.MenuUp);
+      i->MenuDown = i->MenuDown.Update(this.Number, input.MenuDown);
+      i->Action = i->Action.Update(this.Number, input.Action);
+      i->Confirm = i->Confirm.Update(this.Number, input.Confirm);
+      i->Back = i->Back.Update(this.Number, input.Back);
       i->Direction = input.Direction;
     }
     public Input* GetPlayerInput(PlayerRef player) {

@@ -1,0 +1,10 @@
+input
+{
+	button MenuLeft;
+	button MenuRight;
+	button MenuUp;
+	button MenuDown;
+	button Action;
+	button Confirm;
+	button Back;
+}

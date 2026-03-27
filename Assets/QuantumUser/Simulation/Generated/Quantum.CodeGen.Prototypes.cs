@@ -135,6 +135,13 @@ namespace Quantum.Prototypes {
     public Button Right;
     public Button Up;
     public Button Fire;
+    public Button MenuLeft;
+    public Button MenuRight;
+    public Button MenuUp;
+    public Button MenuDown;
+    public Button Action;
+    public Button Confirm;
+    public Button Back;
     public FPVector3 Direction;
     partial void MaterializeUser(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context);
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
@@ -142,6 +149,13 @@ namespace Quantum.Prototypes {
         result.Right = this.Right;
         result.Up = this.Up;
         result.Fire = this.Fire;
+        result.MenuLeft = this.MenuLeft;
+        result.MenuRight = this.MenuRight;
+        result.MenuUp = this.MenuUp;
+        result.MenuDown = this.MenuDown;
+        result.Action = this.Action;
+        result.Confirm = this.Confirm;
+        result.Back = this.Back;
         result.Direction = this.Direction;
         MaterializeUser(frame, ref result, in context);
     }

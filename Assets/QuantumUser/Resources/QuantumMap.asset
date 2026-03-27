@@ -19,9 +19,9 @@ MonoBehaviour:
   UserAsset:
     Id:
       Value: 0
-  Scene: Overworld
-  ScenePath: Assets/Scenes/Quantum/Overworld.unity
-  SceneGuid: ae9d7aaf3122ed54980db5285dc75607
+  Scene: QuantumGameScene
+  ScenePath: Assets/QuantumUser/Scenes/QuantumGameScene.unity
+  SceneGuid: d7c3a3e74e53e634596f9ed5d001ff7a
   WorldSize: 256
   BucketsCount: 16
   BucketsSubdivisions: 8
@@ -40,51 +40,7 @@ MonoBehaviour:
   NavMeshLinks: []
   Regions: []
   StaticColliders2D: []
-  StaticColliders3D:
-  - Rotation:
-      X:
-        RawValue: 0
-      Y:
-        RawValue: 0
-      Z:
-        RawValue: 0
-      W:
-        RawValue: 65536
-    Position:
-      X:
-        RawValue: 0
-      Y:
-        RawValue: 0
-      Z:
-        RawValue: 0
-    PhysicsMaterial:
-      Id:
-        Value: 0
-    ShapeType: 2
-    SphereRadius:
-      RawValue: 0
-    CapsuleRadius:
-      RawValue: 0
-    CapsuleHeight:
-      RawValue: 0
-    BoxExtents:
-      X:
-        RawValue: 983040
-      Y:
-        RawValue: 32768
-      Z:
-        RawValue: 983040
-    SmoothSphereMeshCollisions: 0
-    StaticData:
-      Name: BoxStaticCollider
-      Tag: Untagged
-      Layer: 0
-      Asset:
-        Id:
-          Value: 0
-      IsTrigger: 0
-      ColliderIndex: 0
-      MutableMode: 0
+  StaticColliders3D: []
   MapEntities: []
   SerializedTriangleDataUncompressedSize: 8
   references:
