@@ -16,7 +16,7 @@ namespace Quantum.Battle
                 var playerEntity = frame.Create(entityPrototypAsset);
 
                 // Create a PlayerLink component
-                // frame.Add(playerEntity, new PlayerLink { PlayerRef = player });
+                frame.Add(playerEntity, new PlayerLink { Player = player });
             }
         }
     }

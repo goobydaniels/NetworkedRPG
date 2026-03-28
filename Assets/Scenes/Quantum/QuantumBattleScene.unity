@@ -882,14 +882,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5596583639348584267, guid: 786a73211994a134aba7219180db75d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1273694845}
   m_SourcePrefab: {fileID: 100100000, guid: 786a73211994a134aba7219180db75d5, type: 3}
 --- !u!114 &867722466 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6641156284505162621, guid: 786a73211994a134aba7219180db75d5, type: 3}
   m_PrefabInstance: {fileID: 867722465}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1273694842}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0008c51fe3af00b4da5d44f02d9b3dff, type: 3}
@@ -1032,6 +1035,25 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &1273694842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5596583639348584267, guid: 786a73211994a134aba7219180db75d5, type: 3}
+  m_PrefabInstance: {fileID: 867722465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1273694845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273694842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c857e9293e1eaf4c89588033f312f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Quantum.Unity::Quantum.QPrototypePlayer
+  Prototype:
+    _empty_prototype_dummy_field_: 0
 --- !u!1001 &1965030215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1204,10 +1226,7 @@ MonoBehaviour:
         Value: 351345293547538414
     GameConfig:
       Id:
-        Value: 316527076537738773
-    DefaultPlayerAvatar:
-      Id:
-        Value: 1469709509956703979
+        Value: 501326487748010695
   UseRandomSeed: 0
   SessionConfig: {fileID: 11400000, guid: 18bb699670372a24baca35a988fed04d, type: 2}
   LocalPlayers:

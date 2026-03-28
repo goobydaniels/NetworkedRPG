@@ -12,6 +12,7 @@ namespace Quantum.Battle
             public EntityRef Entity;
             public Transform3D* Transform;
             public PhysicsBody3D* body3D;
+            public Player* player;
         }
 
         // Override update function. the update function runs each frame for each entity that has all the componets in the filter

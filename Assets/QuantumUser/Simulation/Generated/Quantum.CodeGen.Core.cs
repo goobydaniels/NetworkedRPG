@@ -51,17 +51,13 @@ namespace Quantum {
   
   [System.FlagsAttribute()]
   public enum InputButtons : int {
-    Left = 1 << 0,
-    Right = 1 << 1,
-    Up = 1 << 2,
-    Fire = 1 << 3,
-    MenuLeft = 1 << 4,
-    MenuRight = 1 << 5,
-    MenuUp = 1 << 6,
-    MenuDown = 1 << 7,
-    Action = 1 << 8,
-    Confirm = 1 << 9,
-    Back = 1 << 10,
+    MenuLeft = 1 << 0,
+    MenuRight = 1 << 1,
+    MenuUp = 1 << 2,
+    MenuDown = 1 << 3,
+    Action = 1 << 4,
+    Confirm = 1 << 5,
+    Back = 1 << 6,
   }
   public static unsafe partial class FlagsExtensions {
     public static Boolean IsFlagSet(this InputButtons self, InputButtons flag) {
@@ -522,23 +518,15 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Input {
-    public const Int32 SIZE = 160;
+    public const Int32 SIZE = 112;
     public const Int32 ALIGNMENT = 8;
     [FieldOffset(48)]
-    public Button Left;
-    [FieldOffset(108)]
-    public Button Right;
-    [FieldOffset(120)]
-    public Button Up;
-    [FieldOffset(36)]
-    public Button Fire;
-    [FieldOffset(72)]
     public Button MenuLeft;
-    [FieldOffset(84)]
-    public Button MenuRight;
-    [FieldOffset(96)]
-    public Button MenuUp;
     [FieldOffset(60)]
+    public Button MenuRight;
+    [FieldOffset(72)]
+    public Button MenuUp;
+    [FieldOffset(36)]
     public Button MenuDown;
     [FieldOffset(0)]
     public Button Action;
@@ -546,15 +534,11 @@ namespace Quantum {
     public Button Confirm;
     [FieldOffset(12)]
     public Button Back;
-    [FieldOffset(136)]
+    [FieldOffset(88)]
     public FPVector3 Direction;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 19249;
-        hash = hash * 31 + Left.GetHashCode();
-        hash = hash * 31 + Right.GetHashCode();
-        hash = hash * 31 + Up.GetHashCode();
-        hash = hash * 31 + Fire.GetHashCode();
         hash = hash * 31 + MenuLeft.GetHashCode();
         hash = hash * 31 + MenuRight.GetHashCode();
         hash = hash * 31 + MenuUp.GetHashCode();
@@ -571,10 +555,6 @@ namespace Quantum {
     }
     public Boolean IsDown(InputButtons button) {
       switch (button) {
-        case InputButtons.Left: return Left.IsDown;
-        case InputButtons.Right: return Right.IsDown;
-        case InputButtons.Up: return Up.IsDown;
-        case InputButtons.Fire: return Fire.IsDown;
         case InputButtons.MenuLeft: return MenuLeft.IsDown;
         case InputButtons.MenuRight: return MenuRight.IsDown;
         case InputButtons.MenuUp: return MenuUp.IsDown;
@@ -587,10 +567,6 @@ namespace Quantum {
     }
     public Boolean WasPressed(InputButtons button) {
       switch (button) {
-        case InputButtons.Left: return Left.WasPressed;
-        case InputButtons.Right: return Right.WasPressed;
-        case InputButtons.Up: return Up.WasPressed;
-        case InputButtons.Fire: return Fire.WasPressed;
         case InputButtons.MenuLeft: return MenuLeft.WasPressed;
         case InputButtons.MenuRight: return MenuRight.WasPressed;
         case InputButtons.MenuUp: return MenuUp.WasPressed;
@@ -606,22 +582,18 @@ namespace Quantum {
         Button.Serialize(&p->Action, serializer);
         Button.Serialize(&p->Back, serializer);
         Button.Serialize(&p->Confirm, serializer);
-        Button.Serialize(&p->Fire, serializer);
-        Button.Serialize(&p->Left, serializer);
         Button.Serialize(&p->MenuDown, serializer);
         Button.Serialize(&p->MenuLeft, serializer);
         Button.Serialize(&p->MenuRight, serializer);
         Button.Serialize(&p->MenuUp, serializer);
-        Button.Serialize(&p->Right, serializer);
-        Button.Serialize(&p->Up, serializer);
         FPVector3.Serialize(&p->Direction, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
-    public const Int32 SIZE = 1584;
+    public const Int32 SIZE = 1296;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(1580)]
+    [FieldOffset(1292)]
     private fixed Byte _alignment_padding_[4];
     [FieldOffset(0)]
     public AssetRef<Map> Map;
@@ -645,14 +617,14 @@ namespace Quantum {
     public Int32 PlayerConnectedCount;
     [FieldOffset(608)]
     [FramePrinter.FixedArrayAttribute(typeof(Input), 6)]
-    private fixed Byte _input_[960];
-    [FieldOffset(1568)]
+    private fixed Byte _input_[672];
+    [FieldOffset(1280)]
     public BitSet6 PlayerLastConnectionState;
-    [FieldOffset(1576)]
-    public Int32 AsteroidsWaveCount;
+    [FieldOffset(1288)]
+    public Int32 BattleWaveCount;
     public readonly FixedArray<Input> input {
       get {
-        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 160, 6); }
+        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 112, 6); }
       }
     }
     public override readonly Int32 GetHashCode() {
@@ -670,7 +642,7 @@ namespace Quantum {
         hash = hash * 31 + PlayerConnectedCount.GetHashCode();
         hash = hash * 31 + HashCodeUtils.GetArrayHashCode(input);
         hash = hash * 31 + PlayerLastConnectionState.GetHashCode();
-        hash = hash * 31 + AsteroidsWaveCount.GetHashCode();
+        hash = hash * 31 + BattleWaveCount.GetHashCode();
         return hash;
       }
     }
@@ -688,109 +660,23 @@ namespace Quantum {
         serializer.Stream.Serialize(&p->PlayerConnectedCount);
         FixedArray.Serialize(p->input, serializer, Statics.SerializeInput);
         Quantum.BitSet6.Serialize(&p->PlayerLastConnectionState, serializer);
-        serializer.Stream.Serialize(&p->AsteroidsWaveCount);
+        serializer.Stream.Serialize(&p->BattleWaveCount);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
-  public unsafe partial struct AsteroidsAsteroid : Quantum.IComponent {
-    public const Int32 SIZE = 8;
-    public const Int32 ALIGNMENT = 8;
-    [FieldOffset(0)]
-    public AssetRef<EntityPrototype> ChildAsteroid;
-    public override readonly Int32 GetHashCode() {
-      unchecked { 
-        var hash = 5651;
-        hash = hash * 31 + ChildAsteroid.GetHashCode();
-        return hash;
-      }
-    }
-    public static void Serialize(void* ptr, FrameSerializer serializer) {
-        var p = (AsteroidsAsteroid*)ptr;
-        AssetRef.Serialize(&p->ChildAsteroid, serializer);
-    }
-  }
-  [StructLayout(LayoutKind.Explicit)]
-  public unsafe partial struct AsteroidsPlayerLink : Quantum.IComponent {
+  public unsafe partial struct Player : Quantum.IComponent {
     public const Int32 SIZE = 4;
     public const Int32 ALIGNMENT = 4;
     [FieldOffset(0)]
-    public PlayerRef PlayerRef;
+    private fixed Byte _alignment_padding_[4];
     public override readonly Int32 GetHashCode() {
       unchecked { 
-        var hash = 6709;
-        hash = hash * 31 + PlayerRef.GetHashCode();
+        var hash = 2621;
         return hash;
       }
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
-        var p = (AsteroidsPlayerLink*)ptr;
-        PlayerRef.Serialize(&p->PlayerRef, serializer);
-    }
-  }
-  [StructLayout(LayoutKind.Explicit)]
-  public unsafe partial struct AsteroidsProjectile : Quantum.IComponent {
-    public const Int32 SIZE = 16;
-    public const Int32 ALIGNMENT = 8;
-    [FieldOffset(8)]
-    public FP TTL;
-    [FieldOffset(0)]
-    public EntityRef Owner;
-    public override readonly Int32 GetHashCode() {
-      unchecked { 
-        var hash = 2311;
-        hash = hash * 31 + TTL.GetHashCode();
-        hash = hash * 31 + Owner.GetHashCode();
-        return hash;
-      }
-    }
-    public static void Serialize(void* ptr, FrameSerializer serializer) {
-        var p = (AsteroidsProjectile*)ptr;
-        EntityRef.Serialize(&p->Owner, serializer);
-        FP.Serialize(&p->TTL, serializer);
-    }
-  }
-  [StructLayout(LayoutKind.Explicit)]
-  public unsafe partial struct AsteroidsShip : Quantum.IComponent {
-    public const Int32 SIZE = 24;
-    public const Int32 ALIGNMENT = 8;
-    [FieldOffset(8)]
-    public FP AmmoCount;
-    [FieldOffset(16)]
-    public FP FireInterval;
-    [FieldOffset(0)]
-    public Int32 Score;
-    public override readonly Int32 GetHashCode() {
-      unchecked { 
-        var hash = 13043;
-        hash = hash * 31 + AmmoCount.GetHashCode();
-        hash = hash * 31 + FireInterval.GetHashCode();
-        hash = hash * 31 + Score.GetHashCode();
-        return hash;
-      }
-    }
-    public static void Serialize(void* ptr, FrameSerializer serializer) {
-        var p = (AsteroidsShip*)ptr;
-        serializer.Stream.Serialize(&p->Score);
-        FP.Serialize(&p->AmmoCount, serializer);
-        FP.Serialize(&p->FireInterval, serializer);
-    }
-  }
-  [StructLayout(LayoutKind.Explicit)]
-  public unsafe partial struct AsteroidsShipRespawn : Quantum.IComponent {
-    public const Int32 SIZE = 8;
-    public const Int32 ALIGNMENT = 8;
-    [FieldOffset(0)]
-    public FP RespawnTimer;
-    public override readonly Int32 GetHashCode() {
-      unchecked { 
-        var hash = 4813;
-        hash = hash * 31 + RespawnTimer.GetHashCode();
-        return hash;
-      }
-    }
-    public static void Serialize(void* ptr, FrameSerializer serializer) {
-        var p = (AsteroidsShipRespawn*)ptr;
-        FP.Serialize(&p->RespawnTimer, serializer);
+        var p = (Player*)ptr;
     }
   }
   [StructLayout(LayoutKind.Explicit)]
@@ -811,25 +697,9 @@ namespace Quantum {
         PlayerRef.Serialize(&p->Player, serializer);
     }
   }
-  public unsafe partial interface ISignalAsteroidsSpawnShip : ISignal {
-    void AsteroidsSpawnShip(Frame f, EntityRef ship);
-  }
-  public unsafe partial interface ISignalAsteroidsShipShoot : ISignal {
-    void AsteroidsShipShoot(Frame f, EntityRef owner);
-  }
-  public unsafe partial interface ISignalAsteroidsShipDestroyed : ISignal {
-    void AsteroidsShipDestroyed(Frame f, EntityRef ship);
-  }
-  public unsafe partial interface ISignalAsteroidsSpawnAsteroid : ISignal {
-    void AsteroidsSpawnAsteroid(Frame f, AssetRef<EntityPrototype> childPrototype, EntityRef parent);
-  }
   public static unsafe partial class Constants {
   }
   public unsafe partial class Frame {
-    private ISignalAsteroidsSpawnShip[] _ISignalAsteroidsSpawnShipSystems;
-    private ISignalAsteroidsShipShoot[] _ISignalAsteroidsShipShootSystems;
-    private ISignalAsteroidsShipDestroyed[] _ISignalAsteroidsShipDestroyedSystems;
-    private ISignalAsteroidsSpawnAsteroid[] _ISignalAsteroidsSpawnAsteroidSystems;
     partial void AllocGen() {
       _globals = (_globals_*)Context.Allocator.AllocAndClear(sizeof(_globals_));
     }
@@ -841,22 +711,8 @@ namespace Quantum {
     }
     partial void InitGen() {
       Initialize(this, this.SimulationConfig.Entities, 256);
-      _ISignalAsteroidsSpawnShipSystems = BuildSignalsArray<ISignalAsteroidsSpawnShip>();
-      _ISignalAsteroidsShipShootSystems = BuildSignalsArray<ISignalAsteroidsShipShoot>();
-      _ISignalAsteroidsShipDestroyedSystems = BuildSignalsArray<ISignalAsteroidsShipDestroyed>();
-      _ISignalAsteroidsSpawnAsteroidSystems = BuildSignalsArray<ISignalAsteroidsSpawnAsteroid>();
       _ComponentSignalsOnAdded = new ComponentReactiveCallbackInvoker[ComponentTypeId.Type.Length];
       _ComponentSignalsOnRemoved = new ComponentReactiveCallbackInvoker[ComponentTypeId.Type.Length];
-      BuildSignalsArrayOnComponentAdded<Quantum.AsteroidsAsteroid>();
-      BuildSignalsArrayOnComponentRemoved<Quantum.AsteroidsAsteroid>();
-      BuildSignalsArrayOnComponentAdded<Quantum.AsteroidsPlayerLink>();
-      BuildSignalsArrayOnComponentRemoved<Quantum.AsteroidsPlayerLink>();
-      BuildSignalsArrayOnComponentAdded<Quantum.AsteroidsProjectile>();
-      BuildSignalsArrayOnComponentRemoved<Quantum.AsteroidsProjectile>();
-      BuildSignalsArrayOnComponentAdded<Quantum.AsteroidsShip>();
-      BuildSignalsArrayOnComponentRemoved<Quantum.AsteroidsShip>();
-      BuildSignalsArrayOnComponentAdded<Quantum.AsteroidsShipRespawn>();
-      BuildSignalsArrayOnComponentRemoved<Quantum.AsteroidsShipRespawn>();
       BuildSignalsArrayOnComponentAdded<CharacterController2D>();
       BuildSignalsArrayOnComponentRemoved<CharacterController2D>();
       BuildSignalsArrayOnComponentAdded<CharacterController3D>();
@@ -887,6 +743,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<PhysicsJoints2D>();
       BuildSignalsArrayOnComponentAdded<PhysicsJoints3D>();
       BuildSignalsArrayOnComponentRemoved<PhysicsJoints3D>();
+      BuildSignalsArrayOnComponentAdded<Quantum.Player>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.Player>();
       BuildSignalsArrayOnComponentAdded<Quantum.PlayerLink>();
       BuildSignalsArrayOnComponentRemoved<Quantum.PlayerLink>();
       BuildSignalsArrayOnComponentAdded<Transform2D>();
@@ -901,10 +759,6 @@ namespace Quantum {
     partial void SetPlayerInputCodeGen(PlayerRef player, Input input) {
       if ((int)player >= (int)_globals->input.Length) { throw new System.ArgumentOutOfRangeException("player"); }
       var i = _globals->input.GetPointer(player);
-      i->Left = i->Left.Update(this.Number, input.Left);
-      i->Right = i->Right.Update(this.Number, input.Right);
-      i->Up = i->Up.Update(this.Number, input.Up);
-      i->Fire = i->Fire.Update(this.Number, input.Fire);
       i->MenuLeft = i->MenuLeft.Update(this.Number, input.MenuLeft);
       i->MenuRight = i->MenuRight.Update(this.Number, input.MenuRight);
       i->MenuUp = i->MenuUp.Update(this.Number, input.MenuUp);
@@ -926,42 +780,6 @@ namespace Quantum {
       Physics3D?.Init(_globals->PhysicsState3D.MapStaticCollidersState.TrackedMap);
     }
     public unsafe partial struct FrameSignals {
-      public void AsteroidsSpawnShip(EntityRef ship) {
-        var array = _f._ISignalAsteroidsSpawnShipSystems;
-        for (Int32 i = 0; i < array.Length; ++i) {
-          var s = array[i];
-          if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
-            s.AsteroidsSpawnShip(_f, ship);
-          }
-        }
-      }
-      public void AsteroidsShipShoot(EntityRef owner) {
-        var array = _f._ISignalAsteroidsShipShootSystems;
-        for (Int32 i = 0; i < array.Length; ++i) {
-          var s = array[i];
-          if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
-            s.AsteroidsShipShoot(_f, owner);
-          }
-        }
-      }
-      public void AsteroidsShipDestroyed(EntityRef ship) {
-        var array = _f._ISignalAsteroidsShipDestroyedSystems;
-        for (Int32 i = 0; i < array.Length; ++i) {
-          var s = array[i];
-          if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
-            s.AsteroidsShipDestroyed(_f, ship);
-          }
-        }
-      }
-      public void AsteroidsSpawnAsteroid(AssetRef<EntityPrototype> childPrototype, EntityRef parent) {
-        var array = _f._ISignalAsteroidsSpawnAsteroidSystems;
-        for (Int32 i = 0; i < array.Length; ++i) {
-          var s = array[i];
-          if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
-            s.AsteroidsSpawnAsteroid(_f, childPrototype, parent);
-          }
-        }
-      }
     }
   }
   public unsafe partial class Statics {
@@ -972,11 +790,6 @@ namespace Quantum {
     static partial void RegisterSimulationTypesGen(TypeRegistry typeRegistry) {
       typeRegistry.Register(typeof(AssetGuid), AssetGuid.SIZE);
       typeRegistry.Register(typeof(AssetRef), AssetRef.SIZE);
-      typeRegistry.Register(typeof(Quantum.AsteroidsAsteroid), Quantum.AsteroidsAsteroid.SIZE);
-      typeRegistry.Register(typeof(Quantum.AsteroidsPlayerLink), Quantum.AsteroidsPlayerLink.SIZE);
-      typeRegistry.Register(typeof(Quantum.AsteroidsProjectile), Quantum.AsteroidsProjectile.SIZE);
-      typeRegistry.Register(typeof(Quantum.AsteroidsShip), Quantum.AsteroidsShip.SIZE);
-      typeRegistry.Register(typeof(Quantum.AsteroidsShipRespawn), Quantum.AsteroidsShipRespawn.SIZE);
       typeRegistry.Register(typeof(Quantum.BitSet1024), Quantum.BitSet1024.SIZE);
       typeRegistry.Register(typeof(Quantum.BitSet128), Quantum.BitSet128.SIZE);
       typeRegistry.Register(typeof(Quantum.BitSet2048), Quantum.BitSet2048.SIZE);
@@ -1042,6 +855,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(PhysicsJoints3D), PhysicsJoints3D.SIZE);
       typeRegistry.Register(typeof(PhysicsQueryRef), PhysicsQueryRef.SIZE);
       typeRegistry.Register(typeof(PhysicsSceneSettings), PhysicsSceneSettings.SIZE);
+      typeRegistry.Register(typeof(Quantum.Player), Quantum.Player.SIZE);
       typeRegistry.Register(typeof(Quantum.PlayerLink), Quantum.PlayerLink.SIZE);
       typeRegistry.Register(typeof(PlayerRef), PlayerRef.SIZE);
       typeRegistry.Register(typeof(Ptr), Ptr.SIZE);
@@ -1060,13 +874,9 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 6)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 2)
         .AddBuiltInComponents()
-        .Add<Quantum.AsteroidsAsteroid>(Quantum.AsteroidsAsteroid.Serialize, null, null, ComponentFlags.None)
-        .Add<Quantum.AsteroidsPlayerLink>(Quantum.AsteroidsPlayerLink.Serialize, null, null, ComponentFlags.None)
-        .Add<Quantum.AsteroidsProjectile>(Quantum.AsteroidsProjectile.Serialize, null, null, ComponentFlags.None)
-        .Add<Quantum.AsteroidsShip>(Quantum.AsteroidsShip.Serialize, null, null, ComponentFlags.None)
-        .Add<Quantum.AsteroidsShipRespawn>(Quantum.AsteroidsShipRespawn.Serialize, null, null, ComponentFlags.None)
+        .Add<Quantum.Player>(Quantum.Player.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.PlayerLink>(Quantum.PlayerLink.Serialize, null, null, ComponentFlags.None)
         .Finish();
     }
