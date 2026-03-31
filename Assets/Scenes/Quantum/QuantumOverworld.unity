@@ -1064,7 +1064,7 @@ MonoBehaviour:
   AssetRef:
     Id:
       Value: 532981104887645515
-  BakeAllMode: 112
+  BakeAllMode: 240
   NavMeshSerializeType: 0
   StaticCollider2DReferences: []
   StaticCollider3DReferences: []
@@ -1140,7 +1140,7 @@ MonoBehaviour:
       Id:
         Value: 1388098862847224876
   UseRandomSeed: 0
-  SessionConfig: {fileID: 0}
+  SessionConfig: {fileID: 11400000, guid: 18bb699670372a24baca35a988fed04d, type: 2}
   LocalPlayers:
   - PlayerAvatar:
       Id:
