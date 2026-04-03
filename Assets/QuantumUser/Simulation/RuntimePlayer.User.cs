@@ -1,6 +1,6 @@
-﻿namespace Quantum
-{
-    public partial class RuntimePlayer
-    {
+﻿using UnityEngine;
+
+namespace Quantum {
+    public partial class RuntimePlayer {
     }
 }
