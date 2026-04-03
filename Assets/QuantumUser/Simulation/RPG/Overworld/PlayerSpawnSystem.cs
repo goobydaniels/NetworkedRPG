@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Quantum {
     public unsafe class PlayerSpawnSystem : SystemSignalsOnly, ISignalOnPlayerAdded {
         public void OnPlayerAdded(Frame f, PlayerRef player, bool firstTime) {

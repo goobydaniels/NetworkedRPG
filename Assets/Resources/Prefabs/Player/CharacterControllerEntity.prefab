@@ -312,6 +312,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Quantum.Unity::Quantum.QPrototypePlayerLink
   Prototype:
+    BaseSpped:
+      RawValue: 0
+    CurrentSpeed:
+      RawValue: 0
+    JumpForce:
+      RawValue: 0
     Player:
       _index: 0
 --- !u!1 &8267170077115953930

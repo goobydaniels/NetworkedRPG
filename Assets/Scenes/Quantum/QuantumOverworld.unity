@@ -353,7 +353,7 @@ MonoBehaviour:
   Players:
   - PlayerAvatar:
       Id:
-        Value: 1388098862847224876
+        Value: 1344681278079934268
     PlayerNickname: 
   DeltaTimeType: 1
   RecordingFlags: 0
@@ -1387,11 +1387,15 @@ MonoBehaviour:
       Id:
         Value: 351345293547538414
   UseRandomSeed: 0
-  SessionConfig: {fileID: 0}
+  SessionConfig: {fileID: 11400000, guid: 18bb699670372a24baca35a988fed04d, type: 2}
   LocalPlayers:
   - PlayerAvatar:
       Id:
-        Value: 1528421175378562387
+        Value: 1344681278079934268
+    PlayerNickname: 
+  - PlayerAvatar:
+      Id:
+        Value: 1344681278079934268
     PlayerNickname: 
   MaxPlayerCount: 2
   SimulationSpeedMultiplier: 1
