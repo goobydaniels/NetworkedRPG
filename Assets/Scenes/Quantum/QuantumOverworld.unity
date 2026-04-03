@@ -350,12 +350,6 @@ MonoBehaviour:
     SystemsConfig:
       Id:
         Value: 351345293547538414
-    GameConfig:
-      Id:
-        Value: 0
-    DefaultPlayerAvatar:
-      Id:
-        Value: 1388098862847224876
   Players:
   - PlayerAvatar:
       Id:
@@ -505,9 +499,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 439373705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc49ec10f7444b4faa9dec6bf0147e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 44c7391ded8014a4d9d5a48b754a96b0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Quantum.Battle.BattleInput
+  m_EditorClassIdentifier: Assembly-CSharp::OverworldPlayerInputManager
 --- !u!1001 &441241479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1392,22 +1386,12 @@ MonoBehaviour:
     SystemsConfig:
       Id:
         Value: 351345293547538414
-    GameConfig:
-      Id:
-        Value: 0
-    DefaultPlayerAvatar:
-      Id:
-        Value: 1388098862847224876
   UseRandomSeed: 0
   SessionConfig: {fileID: 0}
   LocalPlayers:
   - PlayerAvatar:
       Id:
-        Value: 1388098862847224876
-    PlayerNickname: 
-  - PlayerAvatar:
-      Id:
-        Value: 1388098862847224876
+        Value: 1528421175378562387
     PlayerNickname: 
   MaxPlayerCount: 2
   SimulationSpeedMultiplier: 1

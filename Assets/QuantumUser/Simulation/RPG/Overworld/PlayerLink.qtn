@@ -1,3 +1,8 @@
 component PlayerLink {
+	FP BaseSpped;
+	FP CurrentSpeed;
+
+	FP JumpForce;
+	
 	PlayerRef Player;
 }

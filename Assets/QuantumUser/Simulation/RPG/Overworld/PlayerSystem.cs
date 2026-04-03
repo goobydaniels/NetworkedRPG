@@ -1,16 +1,29 @@
 namespace Quantum {
     using Photon.Deterministic;
+    using System;
 
     public unsafe class PlayerSystem : SystemMainThreadFilter<PlayerSystem.Filter> {
-        public override void Update(Frame frame, ref Filter filter) {
-            Input* input = frame.GetPlayerInput(filter.PlayerLink->Player);
-            filter.PhysicsBody->AddForce(input->Direction * 10);
-        }
-
+        [Serializable]
         public struct Filter {
             public EntityRef Entity;
             public PlayerLink* PlayerLink;
-            public PhysicsBody3D* PhysicsBody;
+            public KCC* KCC;
+        }
+
+        public override void Update(Frame frame, ref Filter filter) {
+            PlayerLink* playerLink = filter.PlayerLink;
+            
+            if (!playerLink->Player.IsValid) return;
+
+            KCC* kcc = filter.KCC;
+            Input* input = frame.GetPlayerInput(playerLink->Player);
+
+            kcc->AddLookRotation(input->LookRotationDelta.X, input->LookRotationDelta.Y);
+            kcc->SetInputDirection(kcc->Data.TransformRotation * input->Direction.XOY);
+
+            if (input->Action.WasPressed && kcc->IsGrounded) {
+                kcc->Jump(FPVector3.Up * playerLink->JumpForce);
+            } 
         }
 
         public void OnPlayerAdded(Frame f, PlayerRef playerRef, bool firstTime) {

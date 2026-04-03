@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -2997230979457167207}
   - component: {fileID: 2837417578391047570}
   - component: {fileID: 2095578930350326391}
+  - component: {fileID: 5336714429586003469}
   m_Layer: 0
   m_Name: KCC
   m_TagString: Untagged
@@ -91,6 +92,10 @@ MonoBehaviour:
       Id:
         Value: 0
     SourceCollider: {fileID: 0}
+    SourceShapeSettings:
+      IsScaledBySource: 0
+      CapsuleDirection2D: 0
+      CapsuleDirection3D: 0
     Shape2D:
       ShapeType: 0
       PolygonCollider:
@@ -310,3 +315,18 @@ MonoBehaviour:
     Settings:
       Id:
         Value: 385596505887953737
+--- !u!114 &5336714429586003469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506928541793919104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b46d330caf8b7488fc12155931d11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Quantum.Unity::Quantum.QPrototypePlayerLink
+  Prototype:
+    Player:
+      _index: 0

@@ -59,7 +59,10 @@ namespace Quantum.Prototypes {
     public Button Action;
     public Button Confirm;
     public Button Back;
-    public FPVector3 Direction;
+    public FPVector2 Direction;
+    public FPVector2 LookRotationDelta;
+    public Button Jump;
+    public FP LastPressTime;
     partial void MaterializeUser(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context);
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
         result.MenuLeft = this.MenuLeft;
@@ -70,6 +73,9 @@ namespace Quantum.Prototypes {
         result.Confirm = this.Confirm;
         result.Back = this.Back;
         result.Direction = this.Direction;
+        result.LookRotationDelta = this.LookRotationDelta;
+        result.Jump = this.Jump;
+        result.LastPressTime = this.LastPressTime;
         MaterializeUser(frame, ref result, in context);
     }
   }
@@ -216,6 +222,9 @@ namespace Quantum.Prototypes {
   [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.PlayerLink))]
   public unsafe partial class PlayerLinkPrototype : ComponentPrototype<Quantum.PlayerLink> {
+    public FP BaseSpped;
+    public FP CurrentSpeed;
+    public FP JumpForce;
     public PlayerRef Player;
     partial void MaterializeUser(Frame frame, ref Quantum.PlayerLink result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
@@ -224,6 +233,9 @@ namespace Quantum.Prototypes {
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
     public void Materialize(Frame frame, ref Quantum.PlayerLink result, in PrototypeMaterializationContext context = default) {
+        result.BaseSpped = this.BaseSpped;
+        result.CurrentSpeed = this.CurrentSpeed;
+        result.JumpForce = this.JumpForce;
         result.Player = this.Player;
         MaterializeUser(frame, ref result, in context);
     }
