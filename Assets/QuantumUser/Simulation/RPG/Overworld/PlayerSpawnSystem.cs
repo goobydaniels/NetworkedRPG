@@ -4,29 +4,15 @@ namespace Quantum {
     public unsafe class PlayerSpawnSystem : SystemSignalsOnly, ISignalOnPlayerAdded {
         public void OnPlayerAdded(Frame f, PlayerRef player, bool firstTime) {
             {
-                if (!firstTime) return;
+                RuntimePlayer data = f.GetPlayerData(player);
+                EntityPrototype asset = f.FindAsset<EntityPrototype>(data.PlayerAvatar);
+                EntityRef entityRef = f.Create(asset);
+                OverworldData overworld = f.FindAsset<OverworldData>(f.Map.UserAsset);
 
-                EntityRef entityRef = CreatePlayer(f, player);
-                
-                //data.location = data.GetSpawnPos();
+                f.Add(entityRef, new PlayerLink { Player = player });
 
-                //// Setting the player's position
-                //if (f.Unsafe.TryGetPointer<Transform3D>(entityRef, out var transform)) {
-                //    transform->Position = data.location;
-                //}
+                overworld.SetEntityToSpawnpoint(f, entityRef, player._index - 1);
             }
-        }
-
-        private EntityRef CreatePlayer(Frame f, PlayerRef player) {
-            RuntimePlayer rtPlayer = f.GetPlayerData(player);
-            EntityRef entityRef = f.Create(rtPlayer.PlayerAvatar);
-
-            PlayerLink link = new PlayerLink {
-                Player = player
-            };
-
-            f.Add(entityRef, link);
-            return entityRef;
         }
     }
 }

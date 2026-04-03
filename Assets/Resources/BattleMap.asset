@@ -18,7 +18,7 @@ MonoBehaviour:
       Value: 532981104887645515
   UserAsset:
     Id:
-      Value: 0
+      Value: 286976872085877389
   Scene: QuantumOverworld
   ScenePath: Assets/Scenes/Quantum/QuantumOverworld.unity
   SceneGuid: 904b2e1e6afb9824ea2a16a20bb3637e
@@ -51,10 +51,31 @@ MonoBehaviour:
     - rid: 8663184503319035904
     - rid: 8663184503319035905
     - rid: 8663184503319035906
+  - Components:
+    - rid: 8362964640061194240
+  - Components:
+    - rid: 1118998549380464640
   SerializedTriangleDataUncompressedSize: 8
   references:
     version: 2
     RefIds:
+    - rid: 1118998549380464640
+      type: {class: Transform3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        Position:
+          X:
+            RawValue: 0
+          Y:
+            RawValue: 98304
+          Z:
+            RawValue: 1059061
+        Rotation:
+          X:
+            RawValue: 0
+          Y:
+            RawValue: 0
+          Z:
+            RawValue: 0
     - rid: 7265589329018224640
       type: {class: Transform3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
@@ -185,6 +206,23 @@ MonoBehaviour:
       data:
         CallbackFlags:
           Value: 0
+    - rid: 8362964640061194240
+      type: {class: Transform3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        Position:
+          X:
+            RawValue: 0
+          Y:
+            RawValue: 98304
+          Z:
+            RawValue: 983040
+        Rotation:
+          X:
+            RawValue: 0
+          Y:
+            RawValue: 0
+          Z:
+            RawValue: 0
     - rid: 8663184503319035904
       type: {class: Transform3DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:

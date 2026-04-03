@@ -1,20 +1,24 @@
+using Photon.Deterministic;
+using System;
+
 namespace Quantum {
-    using System;
-    using Photon.Deterministic;
 
     public unsafe class OverworldData : AssetObject {
         [Serializable]
-        public struct SpawnPointData {
+        public struct SpawnpointData {
             public FPVector3 position;
             public FPQuaternion rotation;
         }
 
-        public SpawnPointData DefaultSpawnPoint;
-        public SpawnPointData[] spawnPoints;
+        public SpawnpointData defaultSpawnpoint;
+        public SpawnpointData[] spawnpoints;
 
-        public void SetEntityToSpawnPoint(Frame frame, EntityRef entity, Int32? index) {
-            var transform = frame.Unsafe.GetPointer<Transform3D>(entity);
-            var spawnPoint = index.HasValue && index.Value < spawnPoints.Length ? spawnPoints[index.Value] : DefaultSpawnPoint;
+        public void SetEntityToSpawnpoint(Frame f, EntityRef entityRef, Int32? index) {
+            Transform3D* transform = f.Unsafe.GetPointer<Transform3D>(entityRef);
+            SpawnpointData spawnPoint = index.HasValue && index.Value < spawnpoints.Length 
+                ? spawnpoints[index.Value] 
+                : defaultSpawnpoint;
+
             transform->Position = spawnPoint.position;
             transform->Rotation = spawnPoint.rotation;
         }
