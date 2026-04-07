@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2837417578391047570}
   - component: {fileID: 2095578930350326391}
   - component: {fileID: 5336714429586003469}
-  - component: {fileID: 7878006414447883241}
   - component: {fileID: 5091221596596122152}
   - component: {fileID: 3483819321912184702}
   m_Layer: 0
@@ -38,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 6800947173694045682}
   - {fileID: 1082568828605197372}
+  - {fileID: 1482105404117623978}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2997230979457167207
@@ -92,11 +92,11 @@ MonoBehaviour:
       RawValue: 0
   PhysicsCollider:
     IsEnabled: 1
-    IsTrigger: 1
+    IsTrigger: 0
     Material:
       Id:
         Value: 0
-    SourceCollider: {fileID: 7878006414447883241}
+    SourceCollider: {fileID: 8236464613862245253}
     SourceShapeSettings:
       IsScaledBySource: 1
       CapsuleDirection2D: 0
@@ -135,14 +135,14 @@ MonoBehaviour:
       SphereRadius:
         RawValue: 0
       CapsuleRadius:
-        RawValue: 22937
+        RawValue: 36044
       CapsuleHeight:
-        RawValue: 117964
+        RawValue: 131072
       PositionOffset:
         X:
           RawValue: 0
         Y:
-          RawValue: 58982
+          RawValue: 0
         Z:
           RawValue: 0
       BoxExtents:
@@ -165,7 +165,7 @@ MonoBehaviour:
     LayerSource: 0
     Layer: 0
     CallbackFlags:
-      Value: 0
+      Value: 6
   PhysicsBody:
     IsEnabled: 1
     Config2D: 116
@@ -229,7 +229,7 @@ MonoBehaviour:
       IsPersistent: 1
       CompoundShapes: []
     ParametricInertiaShape3D:
-      ShapeType: 0
+      ShapeType: 2
       SphereRadius:
         RawValue: 32768
       CapsuleRadius:
@@ -348,29 +348,6 @@ MonoBehaviour:
         RawValue: 0
       Z:
         RawValue: 0
---- !u!136 &7878006414447883241
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506928541793919104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.35
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &5091221596596122152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ec8c6f929399418fd4df8127a87fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Quantum.PlayerView
-  LocalPlayerVisual: {fileID: 1508856809249078551}
+  LocalPlayerVisual: {fileID: 5596583639348584267, guid: 786a73211994a134aba7219180db75d5, type: 3}
   RemotePlayerVisual: {fileID: 1508856809249078551}
 --- !u!114 &3483819321912184702
 MonoBehaviour:
@@ -490,6 +467,61 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2741569845880148336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1482105404117623978}
+  - component: {fileID: 8236464613862245253}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1482105404117623978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741569845880148336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2784763235198929911}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8236464613862245253
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741569845880148336}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.55
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4553151325138414740
 GameObject:
   m_ObjectHideFlags: 0

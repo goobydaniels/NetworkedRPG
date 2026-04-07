@@ -54,31 +54,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2837417578391047570, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
       propertyPath: PhysicsCollider.IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2837417578391047570, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
-      propertyPath: PhysicsCollider.SourceCollider
-      value: 
-      objectReference: {fileID: 874033820431252698}
-    - target: {fileID: 2837417578391047570, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
-      propertyPath: PhysicsCollider.CallbackFlags.Value
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2837417578391047570, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
-      propertyPath: PhysicsCollider.SourceShapeSettings.IsScaledBySource
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7878006414447883241, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+    - target: {fileID: 2837417578391047570, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: PhysicsCollider.Shape3D.CapsuleHeight.RawValue
+      value: 117964
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837417578391047570, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: PhysicsCollider.Shape3D.CapsuleRadius.RawValue
+      value: 22937
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483819321912184702, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: pivot
+      value: 
+      objectReference: {fileID: 6722759090140026834}
+    - target: {fileID: 5091221596596122152, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: LocalPlayerVisual
+      value: 
+      objectReference: {fileID: 8468444599196135972}
+    - target: {fileID: 5336714429586003469, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: Prototype.BaseSpeed.RawValue
+      value: 327680
+      objectReference: {fileID: 0}
+    - target: {fileID: 5336714429586003469, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: Prototype.JumpForce.RawValue
+      value: 327680
+      objectReference: {fileID: 0}
+    - target: {fileID: 5336714429586003469, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: Prototype.CurrentSpeed.RawValue
+      value: 327680
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236464613862245253, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: m_Height
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236464613862245253, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+      propertyPath: m_Radius
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236464613862245253, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
---- !u!136 &874033820431252698 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 7878006414447883241, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+--- !u!4 &6722759090140026834 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4339629453039786209, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
+  m_PrefabInstance: {fileID: 7022655777455296307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8468444599196135972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1508856809249078551, guid: 9633c0dc6f5fc1f47aab20da16b597e4, type: 3}
   m_PrefabInstance: {fileID: 7022655777455296307}
   m_PrefabAsset: {fileID: 0}
