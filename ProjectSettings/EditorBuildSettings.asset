@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Photon/QuantumAddons/KCC/Scenes/Battle/BattleQuantumScene.unity
+    guid: 937b4eb814a349b4da13f36366e3a5ef
+  - enabled: 1
     path: Assets/QuantumUser/Scenes/QuantumGameScene.unity
     guid: d7c3a3e74e53e634596f9ed5d001ff7a
   - enabled: 1
