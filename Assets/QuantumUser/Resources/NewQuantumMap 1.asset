@@ -19,8 +19,8 @@ MonoBehaviour:
   UserAsset:
     Id:
       Value: 0
-  Scene: NewQuantumGameScene
-  ScenePath: Assets/Photon/QuantumAddons/KCC/Scenes/Battle/NewQuantumGameScene.unity
+  Scene: BattleQuantumScene
+  ScenePath: Assets/Photon/QuantumAddons/KCC/Scenes/Battle/BattleQuantumScene.unity
   SceneGuid: 937b4eb814a349b4da13f36366e3a5ef
   WorldSize: 256
   BucketsCount: 16
