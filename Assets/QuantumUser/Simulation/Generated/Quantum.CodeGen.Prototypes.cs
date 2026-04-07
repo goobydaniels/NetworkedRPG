@@ -62,7 +62,6 @@ namespace Quantum.Prototypes {
     public FPVector2 Direction;
     public FPVector2 LookRotationDelta;
     public Button Jump;
-    public FP LastPressTime;
     partial void MaterializeUser(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context);
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
         result.MenuLeft = this.MenuLeft;
@@ -75,7 +74,6 @@ namespace Quantum.Prototypes {
         result.Direction = this.Direction;
         result.LookRotationDelta = this.LookRotationDelta;
         result.Jump = this.Jump;
-        result.LastPressTime = this.LastPressTime;
         MaterializeUser(frame, ref result, in context);
     }
   }
@@ -222,10 +220,11 @@ namespace Quantum.Prototypes {
   [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.PlayerLink))]
   public unsafe partial class PlayerLinkPrototype : ComponentPrototype<Quantum.PlayerLink> {
-    public FP BaseSpped;
+    public FP BaseSpeed;
     public FP CurrentSpeed;
     public FP JumpForce;
     public PlayerRef Player;
+    public FPVector3 CurrentPos;
     partial void MaterializeUser(Frame frame, ref Quantum.PlayerLink result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.PlayerLink component = default;
@@ -233,10 +232,11 @@ namespace Quantum.Prototypes {
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
     public void Materialize(Frame frame, ref Quantum.PlayerLink result, in PrototypeMaterializationContext context = default) {
-        result.BaseSpped = this.BaseSpped;
+        result.BaseSpeed = this.BaseSpeed;
         result.CurrentSpeed = this.CurrentSpeed;
         result.JumpForce = this.JumpForce;
         result.Player = this.Player;
+        result.CurrentPos = this.CurrentPos;
         MaterializeUser(frame, ref result, in context);
     }
   }

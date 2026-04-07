@@ -15,8 +15,8 @@ namespace Quantum {
 
         public void SetEntityToSpawnpoint(Frame f, EntityRef entityRef, Int32? index) {
             Transform3D* transform = f.Unsafe.GetPointer<Transform3D>(entityRef);
-            SpawnpointData spawnPoint = index.HasValue && index.Value < spawnpoints.Length 
-                ? spawnpoints[index.Value] 
+            SpawnpointData spawnPoint = index.HasValue && index.Value < spawnpoints.Length
+                ? spawnpoints[index.Value]
                 : defaultSpawnpoint;
 
             transform->Position = spawnPoint.position;

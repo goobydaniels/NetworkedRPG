@@ -2,5 +2,4 @@ input {
 	FPVector2 Direction;
 	FPVector2 LookRotationDelta;
 	button Jump;
-	FP LastPressTime;
 }
