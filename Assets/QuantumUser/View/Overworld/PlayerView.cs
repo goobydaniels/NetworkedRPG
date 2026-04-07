@@ -14,7 +14,7 @@ namespace Quantum {
                 Cursor.lockState = CursorLockMode.Locked;
 
                 ViewContext.LocalPlayerView = this;
-                ViewContext.LocalPlayerEntity = EntityRef;
+                ViewContext.LocalPlayerEntity = entityRef;
                 ViewContext.LocalPlayer = link.Player;
             }
 

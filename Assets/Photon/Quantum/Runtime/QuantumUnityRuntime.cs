@@ -2313,7 +2313,7 @@ namespace Quantum {
     /// <summary>
     /// The Quantum EntityRef that the underlying entity view is attached to.
     /// </summary>
-    public EntityRef EntityRef => _entityView != null ? _entityView.EntityRef : EntityRef.None;
+    public EntityRef entityRef => _entityView != null ? _entityView.EntityRef : EntityRef.None;
     /// <summary>
     /// A reference to the parent class to access interesting game and entity data.
     /// </summary>
@@ -2324,13 +2324,13 @@ namespace Quantum {
     /// </summary>
     /// <typeparam name="TComponent">Quantum component type</typeparam>
     /// <returns>True, if the entity has the component</returns>
-    public bool HasPredictedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => PredictedFrame == null || EntityView == null ? false : PredictedFrame.Has<TComponent>(EntityRef);
+    public bool HasPredictedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => PredictedFrame == null || EntityView == null ? false : PredictedFrame.Has<TComponent>(entityRef);
     /// <summary>
     /// Checks the verified frame if this Quantum entity has a particular Quantum entity.
     /// </summary>
     /// <typeparam name="TComponent">Quantum component type</typeparam>
     /// <returns>True, if the entity has the component</returns>
-    public bool HasVerifiedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => VerifiedFrame == null || EntityView == null ? false : VerifiedFrame.Has<TComponent>(EntityRef);
+    public bool HasVerifiedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => VerifiedFrame == null || EntityView == null ? false : VerifiedFrame.Has<TComponent>(entityRef);
 
     /// <summary>
     /// Returns the desired Quantum component from the entity of the the predicted frame.
@@ -2339,7 +2339,7 @@ namespace Quantum {
     /// </summary>
     /// <typeparam name="TComponent">Quantum component type</typeparam>
     /// <returns>The Quantum component</returns>
-    public TComponent GetPredictedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => PredictedFrame.Get<TComponent>(EntityRef);
+    public TComponent GetPredictedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => PredictedFrame.Get<TComponent>(entityRef);
 
     /// <summary>
     /// Returns the desired Quantum component from the entity of the the verified frame.
@@ -2348,7 +2348,7 @@ namespace Quantum {
     /// </summary>
     /// <typeparam name="TComponent">Quantum component type</typeparam>
     /// <returns>The Quantum component</returns>
-    public TComponent GetVerifiedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => VerifiedFrame.Get<TComponent>(EntityRef);
+    public TComponent GetVerifiedQuantumComponent<TComponent>() where TComponent : unmanaged, IComponent => VerifiedFrame.Get<TComponent>(entityRef);
 
     /// <summary>
     /// Try to get the component from this Quantum entity and the predicted frame.
@@ -2362,7 +2362,7 @@ namespace Quantum {
         value = default;
         return false;
       }
-      return PredictedFrame.TryGet(EntityRef, out value);
+      return PredictedFrame.TryGet(entityRef, out value);
     }
 
     /// <summary>
@@ -2377,7 +2377,7 @@ namespace Quantum {
         value = default;
         return false;
       }
-      return VerifiedFrame.TryGet(EntityRef, out value);
+      return VerifiedFrame.TryGet(entityRef, out value);
     }
   }
 
