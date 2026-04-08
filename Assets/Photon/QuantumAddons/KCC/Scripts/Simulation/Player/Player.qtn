@@ -1,0 +1,29 @@
+component Player
+{
+    int AttachedProjectilesCount; 
+    FP BaseSpeed;                  
+    FP CurrentSpeed;    
+    
+	FP JumpForce;
+    FP DashForce;
+    FP LastDashTime;
+    int tapWindow;           
+    int wTapCounter;           
+    int sTapCounter;   
+    int dTapCounter;   
+    int aTapCounter;   
+
+    bool isDashing;
+    int dashFrameDuration;    
+    int dashFrameTimer;
+
+    bool lastWPressed ;     
+    bool lastDPressed ;
+    bool lastAPressed ;
+    bool lastSPressed ;
+
+    FPVector3 tempPosition;
+    FPVector3 currentPosition;
+    [HideInInspector]
+    PlayerRef PlayerRef;
+}

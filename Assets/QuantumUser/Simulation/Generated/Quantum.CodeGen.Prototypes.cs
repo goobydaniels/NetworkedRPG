@@ -214,6 +214,62 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.Player))]
+  public unsafe partial class PlayerPrototype : ComponentPrototype<Quantum.Player> {
+    public Int32 AttachedProjectilesCount;
+    public FP BaseSpeed;
+    public FP CurrentSpeed;
+    public FP JumpForce;
+    public FP DashForce;
+    public FP LastDashTime;
+    public Int32 tapWindow;
+    public Int32 wTapCounter;
+    public Int32 sTapCounter;
+    public Int32 dTapCounter;
+    public Int32 aTapCounter;
+    public QBoolean isDashing;
+    public Int32 dashFrameDuration;
+    public Int32 dashFrameTimer;
+    public QBoolean lastWPressed;
+    public QBoolean lastDPressed;
+    public QBoolean lastAPressed;
+    public QBoolean lastSPressed;
+    public FPVector3 tempPosition;
+    public FPVector3 currentPosition;
+    [HideInInspector()]
+    public PlayerRef PlayerRef;
+    partial void MaterializeUser(Frame frame, ref Quantum.Player result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.Player component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.Player result, in PrototypeMaterializationContext context = default) {
+        result.AttachedProjectilesCount = this.AttachedProjectilesCount;
+        result.BaseSpeed = this.BaseSpeed;
+        result.CurrentSpeed = this.CurrentSpeed;
+        result.JumpForce = this.JumpForce;
+        result.DashForce = this.DashForce;
+        result.LastDashTime = this.LastDashTime;
+        result.tapWindow = this.tapWindow;
+        result.wTapCounter = this.wTapCounter;
+        result.sTapCounter = this.sTapCounter;
+        result.dTapCounter = this.dTapCounter;
+        result.aTapCounter = this.aTapCounter;
+        result.isDashing = this.isDashing;
+        result.dashFrameDuration = this.dashFrameDuration;
+        result.dashFrameTimer = this.dashFrameTimer;
+        result.lastWPressed = this.lastWPressed;
+        result.lastDPressed = this.lastDPressed;
+        result.lastAPressed = this.lastAPressed;
+        result.lastSPressed = this.lastSPressed;
+        result.tempPosition = this.tempPosition;
+        result.currentPosition = this.currentPosition;
+        result.PlayerRef = this.PlayerRef;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.PlayerLink))]
   public unsafe partial class PlayerLinkPrototype : ComponentPrototype<Quantum.PlayerLink> {
     public PlayerRef Player;
@@ -225,6 +281,21 @@ namespace Quantum.Prototypes {
     }
     public void Materialize(Frame frame, ref Quantum.PlayerLink result, in PrototypeMaterializationContext context = default) {
         result.Player = this.Player;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.PlayerTag))]
+  public unsafe partial class PlayerTagPrototype : ComponentPrototype<Quantum.PlayerTag> {
+    [HideInInspector()]
+    public Int32 _empty_prototype_dummy_field_;
+    partial void MaterializeUser(Frame frame, ref Quantum.PlayerTag result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.PlayerTag component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.PlayerTag result, in PrototypeMaterializationContext context = default) {
         MaterializeUser(frame, ref result, in context);
     }
   }
