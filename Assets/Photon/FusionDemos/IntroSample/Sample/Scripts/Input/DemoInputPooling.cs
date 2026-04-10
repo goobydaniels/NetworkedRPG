@@ -9,21 +9,21 @@ namespace FusionDemo {
     public class DemoInputPooling : MonoBehaviour, INetworkRunnerCallbacks {
         // Pooling the input
         public void OnInput(NetworkRunner runner, NetworkInput input) {
-            var myInput = new PlayerInputAction();
-            var keyboard = Keyboard.current;
+            PlayerInputAction inputSystem = new();
+            Keyboard keyboard = Keyboard.current;
 
-            var moveDirection = Vector2.zero;
+            Vector3 moveDirection = Vector3.zero;
 
-            if (keyboard.wKey.isPressed) moveDirection += Vector2.up;
-            if (keyboard.sKey.isPressed) moveDirection += Vector2.down;
-            if (keyboard.aKey.isPressed) moveDirection += Vector2.left;
-            if (keyboard.dKey.isPressed) moveDirection += Vector2.right;
+            if (keyboard.wKey.isPressed) moveDirection += Vector3.forward;
+            if (keyboard.sKey.isPressed) moveDirection += Vector3.back;
+            if (keyboard.aKey.isPressed) moveDirection += Vector3.left;
+            if (keyboard.dKey.isPressed) moveDirection += Vector3.right;
 
-            myInput.moveDirection = moveDirection.normalized;
+            inputSystem.moveDirection = moveDirection.normalized;
 
-            myInput.buttons.Set(InputButton.INTERACT, keyboard.eKey.isPressed);
+            inputSystem.buttons.Set(InputButton.INTERACT, keyboard.eKey.isPressed);
 
-            input.Set(myInput);
+            input.Set(inputSystem);
 
         }
 
