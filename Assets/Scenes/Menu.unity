@@ -289,6 +289,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 647651301257576103, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 1837837925727072908, guid: 86b288cc771df29419058b735f4648c6, type: 3}
       propertyPath: m_Name
       value: Menu
@@ -337,6 +341,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2115830931174439019, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 2211063775688430673, guid: 86b288cc771df29419058b735f4648c6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -356,6 +364,10 @@ PrefabInstance:
     - target: {fileID: 2211063775688430673, guid: 86b288cc771df29419058b735f4648c6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3035294024162825321, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 3488626274722534891, guid: 86b288cc771df29419058b735f4648c6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -437,6 +449,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1880763565}
+    - target: {fileID: 5429645510078838542, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672214812900041516, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 5849165579615876748, guid: 86b288cc771df29419058b735f4648c6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -456,6 +476,10 @@ PrefabInstance:
     - target: {fileID: 5849165579615876748, guid: 86b288cc771df29419058b735f4648c6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321911837447026356, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
