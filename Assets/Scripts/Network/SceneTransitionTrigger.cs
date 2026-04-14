@@ -1,58 +1,60 @@
 using Fusion;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using static GameStateHandler;
+
+// https://bitbucket.champlain.edu/projects/S25E321021/repos/sp25-egd320-s101-t02-p02/browse/Water%20Dept/Assets/Scripts/Events/EndZone.cs
 
 public class SceneTransitionTrigger : NetworkBehaviour {
-    private NetworkBool IsSpawned { get; set; }
-    private SceneTransitionTrigger trigger;
-
     [SerializeField] private string nextScene;
-    [SerializeField] private List<GameObject> players = new();
 
-    [Networked] private int playersInRadius { get; set; }
+    [Networked] private TickTimer Timer { get; set; }
+    [SerializeField] private float timeToComplete;
+
+    private bool canStart;
+    private int playersInRadius = 0;
+    private States currentState = States.TRANSITION_TRIGGER;
+
+    public UnityEvent TriggerTransition;
 
     public override void Spawned() {
-        IsSpawned = true;
-        trigger = this;
+        canStart = true;
     }
 
-    public override void FixedUpdateNetwork() {
-        if (!Object.HasStateAuthority && !IsSpawned) return;
-
-        if (playersInRadius >= Runner.ActivePlayers.Count()) {
-            Runner.LoadScene(nextScene);
+    private void FixedUpdate() {
+        if (canStart && Instance.GetGameState == GameState.STARTED) {
+            if (currentState == States.TRANSITION_TRIGGER && playersInRadius == Runner.ActivePlayers.Count()) {
+                if (!Timer.IsRunning) {
+                    Timer = TickTimer.CreateFromSeconds(Runner, timeToComplete);
+                } else if (Timer.ExpiredOrNotRunning(Runner)) {
+                    Timer = TickTimer.None;
+                    RPC_TriggerTransitionSignal();
+                }
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (IsSpawned && other.CompareTag("Player")) {
-            RPC_PlayerEnterStart();
+        if (currentState == States.TRANSITION_TRIGGER && other.CompareTag("Player")) {
+            playersInRadius++;
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (IsSpawned && other.CompareTag("Player")) {
-            RPC_PlayerExitStart();
+        if (currentState == States.TRANSITION_TRIGGER && other.CompareTag("Player")) {
+            playersInRadius--;
         }
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    public void RPC_PlayerEnterStart() {
-        if (transform != null) {
-            if (HasStateAuthority) {
-                trigger.playersInRadius++;
-            }
-        }
-    }
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    private void RPC_TriggerTransitionSignal() => RPC_TriggerTransition();
 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    private void RPC_TriggerTransition() => TriggerSceneTransition();
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    public void RPC_PlayerExitStart() {
-        if (IsSpawned) {
-            if (trigger != null && HasStateAuthority) {
-                trigger.playersInRadius--;
-            }
-        }
+    private void TriggerSceneTransition() {
+        TriggerTransition?.Invoke();
+        Instance.SetGameState(GameState.STARTED);
     }
 }

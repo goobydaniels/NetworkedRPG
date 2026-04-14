@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 758195849929252139}
   - component: {fileID: 2462968609412279260}
   - component: {fileID: 535433192851240037}
+  - component: {fileID: -8995432098909605731}
   m_Layer: 0
   m_Name: HostPlayerSpawner
   m_TagString: Untagged
@@ -99,3 +100,16 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 2462968609412279260}
   ForceRemoteRenderTimeframe: 0
+--- !u!114 &-8995432098909605731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6401715060831625056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11a823002e11744fb67bd2cce421a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameStateHandler
+  state: 0
