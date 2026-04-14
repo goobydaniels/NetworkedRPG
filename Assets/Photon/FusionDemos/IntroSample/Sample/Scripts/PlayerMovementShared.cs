@@ -1,6 +1,7 @@
-using System;
 using Fusion;
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FusionDemo {
   /// <summary>
@@ -9,6 +10,8 @@ namespace FusionDemo {
   [RequireComponent(typeof(NetworkCharacterController))]
   public class PlayerMovementShared : NetworkBehaviour {
     private NetworkCharacterController _cc;
+    private bool isInBattle = false;
+
 
 #if UNITY_IOS || UNITY_ANDROID
     private MobileInput _mobileInput;
@@ -19,31 +22,40 @@ namespace FusionDemo {
 #endif
 
     public override void Spawned() {
-      // get the NetworkCharacterController reference
-      _cc = GetBehaviour<NetworkCharacterController>();
+        // get the NetworkCharacterController reference
+        _cc = GetBehaviour<NetworkCharacterController>();
+
+        if (SceneManager.GetActiveScene().name == "BattleTesting")
+        {
+            isInBattle = true;
+        }
     }
 
     public override void FixedUpdateNetwork() {
-      var dir = GetMoveInput();
+        if (isInBattle)
+        {
+            // Movement is handled by PlayerBattleMovementHost after this point
+            return;
+        }
 
-      // Move with the direction calculated
-      _cc.Move(dir.normalized);
+        var dir = GetMoveInput();
+
+        // Move with the direction calculated
+        _cc.Move(dir.normalized);
+
+            Debug.Log("Playermovement");
     }
 
     private Vector3 GetMoveInput() {
       // initial direction, no movement
       var dir = Vector3.zero;
 
-#if UNITY_IOS || UNITY_ANDROID
-      // Handle mobile input
-      dir = new Vector3(_mobileInput.JoystickDirection.x, 0, _mobileInput.JoystickDirection.y);
-#else
       // Handle horizontal input
       dir += Vector3.right * Input.GetAxisRaw("Horizontal");
 
       // Handle vertical input
       dir += Vector3.forward * Input.GetAxisRaw("Vertical");
-#endif
+
       return dir.normalized;
     }
   }

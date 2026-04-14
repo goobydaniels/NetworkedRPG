@@ -1,5 +1,6 @@
 using Fusion;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FusionDemo {
   /// <summary>
@@ -8,18 +9,29 @@ namespace FusionDemo {
   [RequireComponent(typeof(NetworkCharacterController))]
   public class PlayerMovementHost : NetworkBehaviour {
     private NetworkCharacterController _cc;
+        private bool isInBattle;
     
     [Networked] private NetworkButtons NetworkButtons { get; set; }
 
     public override void Spawned() {
       // get the NetworkCharacterController reference
       _cc = GetBehaviour<NetworkCharacterController>();
+
+        if (SceneManager.GetActiveScene().name == "BattleTesting")
+        {
+            isInBattle = true;
+        }
     }
 
     public override void FixedUpdateNetwork() {
       // If we received input from the input authority
       // The NetworkObject input authority AND the server/host will have the inputs
       if (GetInput<PlayerInputAction>(out var input)) {
+        if (isInBattle)
+        {
+            // Movement is handled by PlayerBattleMovementHost after this point
+            return;
+        }
 
         _cc.Move(input.moveDirection.normalized);
 

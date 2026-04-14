@@ -106,6 +106,16 @@ namespace Fusion {
       Data.Velocity = (transform.position - previousPos) * Runner.TickRate;
       Data.Grounded = _controller.isGrounded;
     }
+
+        public void JumpMoveAction(Vector3 startingPoint, Vector3 EndingPoint)
+        {
+
+        }
+
+        public void MoveMenu(Vector3 direction)
+        {
+
+        }
     
     public override void Spawned() {
       _initial = default;

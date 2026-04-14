@@ -22,9 +22,9 @@ namespace FusionDemo {
             inputSystem.moveDirection = moveDirection.normalized;
 
             inputSystem.buttons.Set(InputButton.INTERACT, keyboard.eKey.isPressed);
+            inputSystem.buttons.Set(InputButton.JUMP, keyboard.spaceKey.isPressed);
 
             input.Set(inputSystem);
-
         }
 
         #region Other callbacks

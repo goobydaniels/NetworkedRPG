@@ -17,9 +17,9 @@ namespace FusionDemo {
 
     public override void FixedUpdateNetwork() {
       // Get input for this tick.
-      if (GetInput<DemoNetworkInput>(out var input)) {
+      if (GetInput<PlayerInputAction>(out var input)) {
         // If the interact button was pressed.
-        if (input.WasPressed(_prevInputButtons, DemoNetworkInput.BUTTON_INTERACT)) {
+        if (input.buttons.WasPressed(_prevInputButtons, InputButton.INTERACT)) {
           // Query for objects on the interact area.
           var hits = Runner.GetPhysicsScene().OverlapSphere(transform.position + transform.forward * 1.5f, _interactRadius, _interactQueryResult, 1, QueryTriggerInteraction.UseGlobal);
           // For each hit detected, if the object implements IInteractable interface call the interact object for the first one detected.
@@ -36,7 +36,7 @@ namespace FusionDemo {
         }
 
         // Store the input buttons to use on the next tick.
-        _prevInputButtons = input.Buttons;
+        _prevInputButtons = input.buttons;
       }
     }
 

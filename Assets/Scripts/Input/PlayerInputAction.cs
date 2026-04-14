@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum InputButton {
     INTERACT,
+    JUMP
 }
 
 public struct PlayerInputAction : INetworkInput {
