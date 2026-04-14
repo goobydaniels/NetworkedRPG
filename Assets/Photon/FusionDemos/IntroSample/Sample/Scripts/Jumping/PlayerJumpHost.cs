@@ -24,6 +24,10 @@ namespace FusionDemo
             {
                 isInBattle = true;
             }
+            else
+            {
+                isInBattle = false;
+            }
         }
 
         public override void FixedUpdateNetwork()

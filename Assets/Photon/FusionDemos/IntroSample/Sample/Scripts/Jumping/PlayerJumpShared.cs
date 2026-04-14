@@ -1,7 +1,8 @@
 using Fusion;
 using FusionDemo;
-using UnityEngine;
 using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FusionDemo
 {
@@ -9,37 +10,41 @@ namespace FusionDemo
     {
         // NetworkCharacterController
         private NetworkCharacterController _cc;
+        private bool isInBattle;
 
-        #if !UNITY_IOS && !UNITY_ANDROID
-        // Used to detect if the interact button was pressed in shared mode context.
+        // Used to detect if the jump button was pressed in shared mode context.
         private bool _jumpPressed;
-        #endif
 
-        #if UNITY_IOS || UNITY_ANDROID
-        private MobileInput _mobileInput;
+        public override void Spawned()
+        {
+            // get the NetworkCharacterController reference
+            _cc = GetBehaviour<NetworkCharacterController>();
 
-        private void Awake() {
-          _mobileInput = FindFirstObjectByType<MobileInput>();
+            if (SceneManager.GetActiveScene().name == "BattleTesting")
+            {
+                isInBattle = true;
+            }
+            else
+            {
+                isInBattle = false;
+            }
         }
-        #endif
 
         public override void FixedUpdateNetwork()
         {
-            // If the interact button was pressed.
+            // If the Jump button was pressed.
             if (GetJumpInput())
             {
                 _cc.Jump(false);
             }
-            #if !UNITY_IOS && !UNITY_ANDROID
             _jumpPressed = false;
-            #endif
         }
 
         #if !UNITY_IOS && !UNITY_ANDROID
         private void Update()
         {
             // Detect interact input in update and store it to use it in FUN.
-            if (Object.HasStateAuthority == false) return;
+            // if (Object.HasStateAuthority == false) return;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -50,11 +55,7 @@ namespace FusionDemo
 
         private bool GetJumpInput()
         {
-            #if UNITY_IOS || UNITY_ANDROID
-                  return _mobileInput.ConsumeInteractInput();
-            #else
             return _jumpPressed;
-            #endif
         }
     }
 
