@@ -159,7 +159,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransitionTrigger
   nextScene: BattleTesting
-  players: []
+  timeToComplete: 5
+  TriggerTransition:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &90159846554514491
 MonoBehaviour:
   m_ObjectHideFlags: 0

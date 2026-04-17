@@ -1,10 +1,8 @@
 using Fusion;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using static GameStateHandler;
-
-// https://bitbucket.champlain.edu/projects/S25E321021/repos/sp25-egd320-s101-t02-p02/browse/Water%20Dept/Assets/Scripts/Events/EndZone.cs
 
 public class SceneTransitionTrigger : NetworkBehaviour {
     [SerializeField] private string nextScene;
@@ -14,9 +12,8 @@ public class SceneTransitionTrigger : NetworkBehaviour {
 
     private bool canStart;
     private int playersInRadius = 0;
+    private List<GameObject> players = new();
     private States currentState = States.TRANSITION_TRIGGER;
-
-    public UnityEvent TriggerTransition;
 
     public override void Spawned() {
         canStart = true;
@@ -37,13 +34,38 @@ public class SceneTransitionTrigger : NetworkBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (currentState == States.TRANSITION_TRIGGER && other.CompareTag("Player")) {
-            playersInRadius++;
+            RPC_PlayerEnter(other.GetComponent<NetworkCharacterController>().Object.Id);
         }
     }
 
     private void OnTriggerExit(Collider other) {
         if (currentState == States.TRANSITION_TRIGGER && other.CompareTag("Player")) {
-            playersInRadius--;
+            RPC_PlayerExit(other.GetComponent<NetworkCharacterController>().Object.Id);
+        }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_PlayerEnter(NetworkId playerID) {
+        GameObject playerRef = Runner.FindObject(playerID).gameObject;
+
+        if (playerRef) {
+            if (!players.Contains(playerRef) && HasStateAuthority) {
+                playersInRadius++;
+                players.Add(playerRef);
+                Debug.Log(playersInRadius);
+            }
+        }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_PlayerExit(NetworkId playerID) {
+        GameObject playerRef = Runner.FindObject(playerID).gameObject;
+        if (playerRef && HasStateAuthority) {
+            if (players.Contains(playerRef)) {
+                players.Remove(playerRef);
+                playersInRadius--;
+                Debug.Log(playersInRadius);
+            }
         }
     }
 
@@ -54,7 +76,6 @@ public class SceneTransitionTrigger : NetworkBehaviour {
     private void RPC_TriggerTransition() => TriggerSceneTransition();
 
     private void TriggerSceneTransition() {
-        TriggerTransition?.Invoke();
-        Instance.SetGameState(GameState.STARTED);
+        Runner.LoadScene(nextScene);
     }
 }
