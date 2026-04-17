@@ -7,7 +7,7 @@ public enum InputButton {
 }
 
 public struct PlayerInputAction : INetworkInput {
-    public Vector3 moveDirection;
+    public Vector2 moveDirection;
     public Vector2 lookDelta;
     public Vector2 cameraDirection;
 
