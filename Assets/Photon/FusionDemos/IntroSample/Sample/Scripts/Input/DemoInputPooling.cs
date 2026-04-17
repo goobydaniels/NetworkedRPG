@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace FusionDemo {
-    public class DemoInputPooling : MonoBehaviour, INetworkRunnerCallbacks {
+    public class DemoInputPooling : SimulationBehaviour, INetworkRunnerCallbacks {
         // Pooling the input
         public void OnInput(NetworkRunner runner, NetworkInput input) {
             PlayerInputAction inputSystem = new();
