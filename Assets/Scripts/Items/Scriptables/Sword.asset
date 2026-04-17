@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::SwordItem
   itemName: Greatsword
-  type: 0
+  type: 4
   rarity: 0
   damage: 4
   durability: 12
