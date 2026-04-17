@@ -52,7 +52,6 @@ public class SceneTransitionTrigger : NetworkBehaviour {
             if (!players.Contains(playerRef) && HasStateAuthority) {
                 playersInRadius++;
                 players.Add(playerRef);
-                Debug.Log(playersInRadius);
             }
         }
     }
@@ -64,7 +63,6 @@ public class SceneTransitionTrigger : NetworkBehaviour {
             if (players.Contains(playerRef)) {
                 players.Remove(playerRef);
                 playersInRadius--;
-                Debug.Log(playersInRadius);
             }
         }
     }
