@@ -62,11 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6493919408995127217, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9969583
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 6493919408995127217, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.07793707
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 8433023596025763233, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
       propertyPath: SortKey
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8433023596025763233, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8433023596025763233, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
       propertyPath: 'NetworkedBehaviours.Array.data[2]'
@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: 'NetworkedBehaviours.Array.data[5]'
       value: 
       objectReference: {fileID: 2744069238389439978}
+    - target: {fileID: 8433023596025763233, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
+      propertyPath: 'NetworkedBehaviours.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8695660460322192762}
+    - target: {fileID: 8433023596025763233, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
+      propertyPath: 'NetworkedBehaviours.Array.data[7]'
+      value: 
+      objectReference: {fileID: 3287085299580182170}
     m_RemovedComponents:
     - {fileID: 0}
     m_RemovedGameObjects: []
@@ -120,6 +128,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c55a65e0b62c24ea8ced29e393b2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FusionDemo.PlayerJumpHost
+--- !u!114 &3287085299580182170 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5642718027856535306, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
+  m_PrefabInstance: {fileID: 2030872140219793004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c01c1286a277bc4dba0a097990f8161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
 --- !u!114 &3540225805774728675 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3246659850101724047, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
@@ -142,3 +161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7745fe51a8b694c4e8129ac729789aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8695660460322192762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1980974232294636778, guid: 1906ca23e8a2e244f918ff8ed04ba133, type: 3}
+  m_PrefabInstance: {fileID: 2030872140219793004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b52c088e2a254045abede03708ee1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
