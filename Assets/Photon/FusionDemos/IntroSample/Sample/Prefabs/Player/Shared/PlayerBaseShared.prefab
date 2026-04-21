@@ -122,7 +122,6 @@ GameObject:
   - component: {fileID: -402902742968262172}
   - component: {fileID: 773894597437488074}
   - component: {fileID: 4569481606021145019}
-  - component: {fileID: 7093499709856295773}
   m_Layer: 0
   m_Name: PlayerBaseShared
   m_TagString: Untagged
@@ -171,7 +170,6 @@ MonoBehaviour:
   - {fileID: -402902742968262172}
   - {fileID: 773894597437488074}
   - {fileID: 4569481606021145019}
-  - {fileID: 7093499709856295773}
   ForceRemoteRenderTimeframe: 0
 --- !u!143 &8552849633272174382
 CharacterController:
@@ -280,18 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffc287a0b936b84da48ec414f95a1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FusionDemo.PlayerJumpShared
---- !u!114 &7093499709856295773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336722378362010922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 214bf57600f80ea468c043a5c23a3f51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FusionDemo.PlayerBattleMovementShared
 --- !u!1 &5001024103311967160
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +304,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5001024103311967160}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.07793707, y: -0, z: -0, w: 0.9969583}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0

@@ -121,8 +121,7 @@ GameObject:
   - component: {fileID: 3246659850101724047}
   - component: {fileID: -344493261251582540}
   - component: {fileID: 1416143158492869093}
-  - component: {fileID: -4872973933657989250}
-  - component: {fileID: 4116670648546116825}
+  - component: {fileID: -5027144060766338170}
   m_Layer: 0
   m_Name: PlayerBaseHost
   m_TagString: Player
@@ -170,8 +169,7 @@ MonoBehaviour:
   - {fileID: 3246659850101724047}
   - {fileID: -344493261251582540}
   - {fileID: 1416143158492869093}
-  - {fileID: -4872973933657989250}
-  - {fileID: 4116670648546116825}
+  - {fileID: -5027144060766338170}
   ForceRemoteRenderTimeframe: 0
 --- !u!143 &8552849633272174382
 CharacterController:
@@ -268,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactRadius: 1.25
---- !u!114 &-4872973933657989250
+--- !u!114 &-5027144060766338170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,18 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c55a65e0b62c24ea8ced29e393b2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FusionDemo.PlayerJumpHost
---- !u!114 &4116670648546116825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336722378362010922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f931a11d0c07dc542847b6440dc13e06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FusionDemo.PlayerBattleMovementHost
 --- !u!1 &5001024103311967160
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +304,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5001024103311967160}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.07793707, y: -0, z: -0, w: 0.9969583}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
