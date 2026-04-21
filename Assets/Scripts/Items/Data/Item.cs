@@ -1,10 +1,20 @@
 using UnityEngine;
 
-public abstract class Item<T> : ScriptableObject {
+// Non generic item class 
+public abstract class Item : ScriptableObject {
     [Header("Default Item Data")]
     public string itemName;
     public ItemType type;
     public ItemRarity rarity;
-    
+    public int quantity = 1;
+    public int maxQuantity = 1;
+
+    [Header("Item Visualization")]
+    public Sprite icon;
+    public GameObject model;
+}
+
+// Creating a generic Item class
+public abstract class Item<T> : Item {
     public abstract T GetInstance();
 }
