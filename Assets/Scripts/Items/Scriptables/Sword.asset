@@ -15,8 +15,11 @@ MonoBehaviour:
   itemName: Greatsword
   type: 4
   rarity: 0
+  quantity: 1
+  maxQuantity: 1
   icon: {fileID: 0}
-  model: {fileID: 4277880187368138193, guid: a5a0d548c7c96be42aed310bd771aa7a, type: 3}
+  model: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 3bc7f45f9ae53ce439b9175b6dd29a3b, type: 2}
   damage: 4
   durability: 12
   statusEffect: 1

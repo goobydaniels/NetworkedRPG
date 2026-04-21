@@ -11,7 +11,8 @@ public abstract class Item : ScriptableObject {
 
     [Header("Item Visualization")]
     public Sprite icon;
-    public GameObject model;
+    public Mesh model;
+    public Material material;
 }
 
 // Creating a generic Item class
