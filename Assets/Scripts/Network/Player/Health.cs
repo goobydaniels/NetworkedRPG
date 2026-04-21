@@ -35,6 +35,14 @@ public class Health : NetworkBehaviour {
         return true;
     }
 
+    public bool Heal(int health) {
+        if (!IsAlive) return false;
+
+        CurrentHealth += Mathf.Clamp(health, 0, startHealth);
+
+        return true;
+    }
+
     public void Revive() {
         CurrentHealth = startHealth;
     }
