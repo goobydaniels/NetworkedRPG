@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::SwordItem
   itemName: Greatsword
-  type: 0
+  type: 4
   rarity: 0
+  quantity: 1
+  maxQuantity: 1
+  icon: {fileID: 0}
+  model: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 3bc7f45f9ae53ce439b9175b6dd29a3b, type: 2}
   damage: 4
   durability: 12
   statusEffect: 1
