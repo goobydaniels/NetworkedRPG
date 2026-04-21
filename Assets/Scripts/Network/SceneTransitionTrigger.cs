@@ -53,6 +53,7 @@ public class SceneTransitionTrigger : NetworkBehaviour {
                 playersInRadius++;
                 players.Add(playerRef);
             }
+
         }
     }
 
