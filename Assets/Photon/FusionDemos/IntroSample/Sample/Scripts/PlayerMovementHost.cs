@@ -9,8 +9,7 @@ namespace FusionDemo {
   [RequireComponent(typeof(NetworkCharacterController))]
   public class PlayerMovementHost : NetworkBehaviour {
     private NetworkCharacterController _cc;
-        private bool isInBattle;
-    
+    [Networked] private bool isInBattle { get; set; }
     [Networked] private NetworkButtons NetworkButtons { get; set; }
 
     public override void Spawned() {
@@ -24,19 +23,28 @@ namespace FusionDemo {
     }
 
     public override void FixedUpdateNetwork() {
-      // If we received input from the input authority
-      // The NetworkObject input authority AND the server/host will have the inputs
-      if (GetInput<PlayerInputAction>(out var input)) {
-        if (isInBattle)
+        var battleSystem = FindFirstObjectByType<BattleSystemHost>();
+
+        if (battleSystem != null && battleSystem.CurrentTurnPlayer != Object.InputAuthority)
         {
-            // Movement is handled by PlayerBattleMovementHost after this point
+            // If its NOT this player's current time
             return;
         }
 
-        _cc.Move(input.moveDirection.normalized);
+        // If we received input from the input authority
+        // The NetworkObject input authority AND the server/host will have the inputs
+        if (GetInput<PlayerInputAction>(out var input))
+        {
+            if (isInBattle)
+            {
+                // Movement is handled by PlayerBattleMovementHost after this point
+                return;
+            }
 
-        // Store the current buttons to use them on the next FUN (FixedUpdateNetwork) call
-        NetworkButtons = input.buttons;
+            _cc.Move(input.moveDirection.normalized);
+
+            // Store the current buttons to use them on the next FUN (FixedUpdateNetwork) call
+            NetworkButtons = input.buttons;
       }
     }
   }

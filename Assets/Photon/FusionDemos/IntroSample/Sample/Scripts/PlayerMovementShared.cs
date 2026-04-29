@@ -1,5 +1,6 @@
 using Fusion;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,9 +33,11 @@ namespace FusionDemo {
     }
 
     public override void FixedUpdateNetwork() {
-        if (isInBattle)
+        var battleSystem = FindFirstObjectByType<BattleSystemHost>();
+
+        if (battleSystem != null && battleSystem.CurrentTurnPlayer != Runner.LocalPlayer)
         {
-            // Movement is handled by PlayerBattleMovementHost after this point
+            // Not this players turn so no movement
             return;
         }
 
@@ -43,7 +46,7 @@ namespace FusionDemo {
         // Move with the direction calculated
         _cc.Move(dir.normalized);
 
-            Debug.Log("Playermovement");
+        Debug.Log("Playermovement");
     }
 
     private Vector3 GetMoveInput() {
