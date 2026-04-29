@@ -13,7 +13,6 @@ public class SceneTransitionTrigger : NetworkBehaviour {
     private bool canStart;
     private int playersInRadius = 0;
     private List<GameObject> players = new();
-    private States currentState = States.TRANSITION_TRIGGER;
 
     public override void Spawned() {
         canStart = true;
@@ -21,7 +20,7 @@ public class SceneTransitionTrigger : NetworkBehaviour {
 
     private void FixedUpdate() {
         if (canStart && Instance.GetGameState == GameState.STARTED) {
-            if (currentState == States.TRANSITION_TRIGGER && playersInRadius == Runner.ActivePlayers.Count()) {
+            if (playersInRadius == Runner.ActivePlayers.Count()) {
                 if (!Timer.IsRunning) {
                     Timer = TickTimer.CreateFromSeconds(Runner, timeToComplete);
                 } else if (Timer.ExpiredOrNotRunning(Runner)) {
@@ -33,13 +32,13 @@ public class SceneTransitionTrigger : NetworkBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (currentState == States.TRANSITION_TRIGGER && other.CompareTag("Player")) {
+        if (other.CompareTag("Player")) {
             RPC_PlayerEnter(other.GetComponent<NetworkCharacterController>().Object.Id);
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (currentState == States.TRANSITION_TRIGGER && other.CompareTag("Player")) {
+        if (other.CompareTag("Player")) {
             RPC_PlayerExit(other.GetComponent<NetworkCharacterController>().Object.Id);
         }
     }
