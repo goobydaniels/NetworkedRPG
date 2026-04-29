@@ -22,4 +22,5 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 3bc7f45f9ae53ce439b9175b6dd29a3b, type: 2}
   damage: 4
   durability: 12
-  statusEffect: 1
+  durabilityUse: 2
+  statusEffect: 0
