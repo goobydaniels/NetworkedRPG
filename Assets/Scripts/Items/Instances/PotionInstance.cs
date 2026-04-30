@@ -4,7 +4,6 @@ using UnityEngine;
 
 [Serializable]
 public class PotionInstance : ItemInstance {
-    public PotionItem Instance;
     public StatusEffects effect;
     public int healAmount;
     public int hurtAmount;
@@ -16,8 +15,8 @@ public class PotionInstance : ItemInstance {
         hurtAmount = source.hurtAmount;
     }
 
-    public override void Use(NetworkRunner runner, NetworkObject user) {
-        if (!runner) return;
+    public override bool Use(NetworkRunner runner, NetworkObject user, int quantity) {
+        if (!runner) return false;
 
         if (user.TryGetComponent<Health>(out var userHealth)) {
             switch (effect) {
@@ -30,6 +29,8 @@ public class PotionInstance : ItemInstance {
                     userHealth.Hit(hurtAmount);
                     break;
             }
-        } 
+        }
+
+        return base.Use(runner, user, quantity);
     }
 }

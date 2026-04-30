@@ -3,7 +3,6 @@ using System;
 
 [Serializable]
 public class SwordInstance : ItemInstance {
-    public SwordItem Instance;
     public int currentDurability;
     public int useDurability;
 
@@ -13,7 +12,7 @@ public class SwordInstance : ItemInstance {
         useDurability = source.durabilityUse;
     }
 
-    public override void Use(NetworkRunner runner, NetworkObject user) {
-        currentDurability -= useDurability;
+    public void Use(NetworkRunner runner, NetworkObject user, NetworkObject target) {
+        base.Use(runner, user, useDurability);
     }
 }

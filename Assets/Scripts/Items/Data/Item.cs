@@ -3,6 +3,7 @@ using UnityEngine;
 // Non generic item class 
 public abstract class Item : ScriptableObject {
     [Header("Default Item Data")]
+    public int id;
     public string itemName;
     public ItemType type;
     public ItemRarity rarity;
