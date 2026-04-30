@@ -3,49 +3,54 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace FusionDemo {
-  /// <summary>
-  /// A simple networked player movement class for host/server mode.
-  /// </summary>
-  [RequireComponent(typeof(NetworkCharacterController))]
-  public class PlayerMovementHost : NetworkBehaviour {
-    private NetworkCharacterController _cc;
-    [Networked] private bool isInBattle { get; set; }
-    [Networked] private NetworkButtons NetworkButtons { get; set; }
+    /// <summary>
+    /// A simple networked player movement class for host/server mode.
+    /// </summary>
+    [RequireComponent(typeof(NetworkCharacterController))]
+    public class PlayerMovementHost : NetworkBehaviour
+    {
+        private NetworkCharacterController _cc;
+        [Networked] private NetworkButtons NetworkButtons { get; set; }
 
-    public override void Spawned() {
-      // get the NetworkCharacterController reference
-      _cc = GetBehaviour<NetworkCharacterController>();
-
-        if (SceneManager.GetActiveScene().name == "BattleTesting")
+        public override void Spawned()
         {
-            isInBattle = true;
-        }
-    }
-
-    public override void FixedUpdateNetwork() {
-        var battleSystem = FindFirstObjectByType<BattleSystemHost>();
-
-        if (battleSystem != null && battleSystem.CurrentTurnPlayer != Object.InputAuthority)
-        {
-            // If its NOT this player's current time
-            return;
+            // get the NetworkCharacterController reference
+            _cc = GetBehaviour<NetworkCharacterController>();
         }
 
-        // If we received input from the input authority
-        // The NetworkObject input authority AND the server/host will have the inputs
-        if (GetInput<PlayerInputAction>(out var input))
-        {
-            if (isInBattle)
+        public override void FixedUpdateNetwork() {
+            // If we received input from the input authority
+            // The NetworkObject input authority AND the server/host will have the inputs
+            if (GetInput<PlayerInputAction>(out var input))
             {
-                // Movement is handled by PlayerBattleMovementHost after this point
-                return;
+                if (BattleStateManager.singleton.state == BattleStateManager.BattleState.NOT_IN_BATTLE)
+                {
+                    // Overworld movement
+                    _cc.Move(input.moveDirection.normalized);
+                }
+                else
+                {
+                    // In battle movement, should move menus
+                    switch (BattleStateManager.singleton.state)
+                    {
+                        case BattleStateManager.BattleState.PLAYER1_TURN:
+                            // Should be for menu navigation
+                            _cc.Move(input.moveDirection.normalized);
+                            break;
+
+                        case BattleStateManager.BattleState.PLAYER2_TURN:
+                            // Do nothing because its not the clients turn and the enemy is not attacking
+                            break;
+
+                        case BattleStateManager.BattleState.ENEMY_TURN:
+                            _cc.Move(input.moveDirection.normalized);
+                            break;
+                    }
+                }
+
+                // Store the current buttons to use them on the next FUN (FixedUpdateNetwork) call
+                NetworkButtons = input.buttons;
             }
-
-            _cc.Move(input.moveDirection.normalized);
-
-            // Store the current buttons to use them on the next FUN (FixedUpdateNetwork) call
-            NetworkButtons = input.buttons;
-      }
+        }
     }
-  }
 }

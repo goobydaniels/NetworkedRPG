@@ -3,6 +3,7 @@ using Fusion;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using static GameStateHandler;
+using static BattleStateManager;
 
 namespace FusionDemo {
     /// <summary>
@@ -26,8 +27,6 @@ namespace FusionDemo {
             } else {
                 RPC_RequestAvatarSpawn(default, Runner.LocalPlayer, Runner.LocalPlayer.ToString());
             }
-
-            Instance.SetGameState(GameState.STARTED);
         }
 
         // Spawns the avatar for the player with the specified skin and username.

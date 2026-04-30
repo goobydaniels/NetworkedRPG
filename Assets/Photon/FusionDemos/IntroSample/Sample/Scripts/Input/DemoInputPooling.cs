@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Fusion;
+﻿using Fusion;
 using Fusion.Sockets;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +34,10 @@ namespace FusionDemo {
 
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
-        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) { }
+        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+        {
+            // BattleStateManager.BattleInstance.set
+        }
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) { }
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
@@ -49,15 +53,9 @@ namespace FusionDemo {
         public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
         public void OnSceneLoadDone(NetworkRunner runner)
         {
-            // Find the battle system in the newly loaded scene
-            var battleSystem = FindFirstObjectByType<BattleSystemHost>();
-            Debug.Log("OnSceneLoadDone");
-
-            if (battleSystem != null)
-            {
-                battleSystem.OnBattleStart();
-            }
+            Debug.Log(runner.GetAllNetworkObjects());
         }
+
         public void OnSceneLoadStart(NetworkRunner runner) { }
 
         #endregion

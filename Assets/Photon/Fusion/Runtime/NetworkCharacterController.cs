@@ -114,7 +114,7 @@ namespace Fusion {
 
         public void MoveMenu(Vector3 direction)
         {
-
+            
         }
     
     public override void Spawned() {

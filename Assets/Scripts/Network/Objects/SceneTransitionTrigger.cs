@@ -20,7 +20,7 @@ public class SceneTransitionTrigger : NetworkBehaviour {
     }
 
     private void FixedUpdate() {
-        if (canStart && Instance.GetGameState == GameState.STARTED) {
+        if (canStart) {
             if (currentState == States.TRANSITION_TRIGGER && playersInRadius == Runner.ActivePlayers.Count()) {
                 if (!Timer.IsRunning) {
                     Timer = TickTimer.CreateFromSeconds(Runner, timeToComplete);

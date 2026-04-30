@@ -1,12 +1,15 @@
+using Fusion;
 using UnityEngine;
 
-public class GameStateHandler : MonoBehaviour {
+public class GameStateHandler : NetworkBehaviour
+{
     public enum GameState {
         NOT_STARTED,
         STARTED,
         IN_BATTLE,
         END
     }
+
     public static GameStateHandler Instance {
         get => singleton;
         set {
@@ -22,18 +25,34 @@ public class GameStateHandler : MonoBehaviour {
     }
 
     public static GameStateHandler singleton;
-    [SerializeField] private GameState state = GameState.NOT_STARTED;
+    [Networked] public GameState state { get; set; }
 
-    public GameState GetGameState => state;
-    public void SetGameState(GameState nState) => state = nState;
-
-    private void Awake() {
-        if (Instance != null) {
-            Destroy(gameObject);
+    public GameState GetGameState => Object != null && Object.IsValid ? state : GameState.NOT_STARTED;
+    public void SetGameState(GameState nState)
+    {
+        if (Object == null || !Object.IsValid)
+        {
+            Debug.LogWarning("Tried to set GameState before spawn");
             return;
         }
 
+        if (!Object.HasStateAuthority)
+        {
+            Debug.LogWarning("Tried to set GameState without StateAuthority");
+            return;
+        }
+
+        state = nState;
+    }
+
+    public override void Spawned()
+    {
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        if (Object.HasStateAuthority)
+        {
+            state = GameState.NOT_STARTED;
+        }
     }
 }

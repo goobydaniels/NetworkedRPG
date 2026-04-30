@@ -1,65 +1,62 @@
 using Fusion;
-using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Windows;
 
-namespace FusionDemo {
-  /// <summary>
-  /// A simple networked player movement class for shared mode.
-  /// </summary>
-  [RequireComponent(typeof(NetworkCharacterController))]
-  public class PlayerMovementShared : NetworkBehaviour {
-    private NetworkCharacterController _cc;
-    private bool isInBattle = false;
+namespace FusionDemo
+{
+    /// <summary>
+    /// A simple networked player movement class for shared mode.
+    /// </summary>
+    [RequireComponent(typeof(NetworkCharacterController))]
+    public class PlayerMovementShared : NetworkBehaviour
+    {
+        private NetworkCharacterController _cc;
 
-
-#if UNITY_IOS || UNITY_ANDROID
-    private MobileInput _mobileInput;
-
-    private void Awake() {
-      _mobileInput = FindFirstObjectByType<MobileInput>();
-    }
-#endif
-
-    public override void Spawned() {
-        // get the NetworkCharacterController reference
-        _cc = GetBehaviour<NetworkCharacterController>();
-
-        if (SceneManager.GetActiveScene().name == "BattleTesting")
-        {
-            isInBattle = true;
-        }
-    }
-
-    public override void FixedUpdateNetwork() {
-        var battleSystem = FindFirstObjectByType<BattleSystemHost>();
-
-        if (battleSystem != null && battleSystem.CurrentTurnPlayer != Runner.LocalPlayer)
-        {
-            // Not this players turn so no movement
-            return;
+        public override void Spawned() {
+            // get the NetworkCharacterController reference
+            _cc = GetBehaviour<NetworkCharacterController>();
         }
 
-        var dir = GetMoveInput();
+        public override void FixedUpdateNetwork() {
+            var dir = GetMoveInput();
 
-        // Move with the direction calculated
-        _cc.Move(dir.normalized);
+            if (BattleStateManager.singleton.state == BattleStateManager.BattleState.NOT_IN_BATTLE)
+            {
+                // Overworld movement
+                _cc.Move(dir.normalized);
+            }
+            else
+            {
+                // In battle movement, should move menus
+                switch (BattleStateManager.singleton.state)
+                {
+                    case BattleStateManager.BattleState.PLAYER1_TURN:
+                        // Do nothing because its not the clients turn and the enemy is not attacking
+                        break;
 
-        Debug.Log("Playermovement");
+                    case BattleStateManager.BattleState.PLAYER2_TURN:
+                        // Should be for menu navigation
+                        _cc.Move(dir.normalized);
+                        break;
+
+                    case BattleStateManager.BattleState.ENEMY_TURN:
+                        _cc.Move(dir.normalized);
+                        break;
+                }
+            }
+        }
+
+        private Vector3 GetMoveInput() {
+            // initial direction, no movement
+            var dir = Vector3.zero;
+
+            // Handle horizontal input
+            dir += Vector3.right * UnityEngine.Input.GetAxisRaw("Horizontal");
+
+            // Handle vertical input
+            dir += Vector3.forward * UnityEngine.Input.GetAxisRaw("Vertical");
+
+            return dir.normalized;
+        }
     }
-
-    private Vector3 GetMoveInput() {
-      // initial direction, no movement
-      var dir = Vector3.zero;
-
-      // Handle horizontal input
-      dir += Vector3.right * Input.GetAxisRaw("Horizontal");
-
-      // Handle vertical input
-      dir += Vector3.forward * Input.GetAxisRaw("Vertical");
-
-      return dir.normalized;
-    }
-  }
 }
