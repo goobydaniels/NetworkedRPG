@@ -9,13 +9,13 @@ namespace FusionDemo {
     [RequireComponent(typeof(NetworkCharacterController))]
     public class PlayerMovementHost : NetworkBehaviour
     {
-        private NetworkCharacterController _cc;
+        private NetworkCharacterController cc;
         [Networked] private NetworkButtons NetworkButtons { get; set; }
 
         public override void Spawned()
         {
             // get the NetworkCharacterController reference
-            _cc = GetBehaviour<NetworkCharacterController>();
+            cc = GetBehaviour<NetworkCharacterController>();
         }
 
         public override void FixedUpdateNetwork() {
@@ -26,7 +26,7 @@ namespace FusionDemo {
                 if (BattleStateManager.singleton.state == BattleStateManager.BattleState.NOT_IN_BATTLE)
                 {
                     // Overworld movement
-                    _cc.Move(input.moveDirection.normalized);
+                    cc.Move(input.moveDirection.normalized);
                 }
                 else
                 {
@@ -35,7 +35,7 @@ namespace FusionDemo {
                     {
                         case BattleStateManager.BattleState.PLAYER1_TURN:
                             // Should be for menu navigation
-                            _cc.Move(input.moveDirection.normalized);
+                            cc.Move(input.moveDirection.normalized);
                             break;
 
                         case BattleStateManager.BattleState.PLAYER2_TURN:
@@ -43,7 +43,7 @@ namespace FusionDemo {
                             break;
 
                         case BattleStateManager.BattleState.ENEMY_TURN:
-                            _cc.Move(input.moveDirection.normalized);
+                            cc.Move(input.moveDirection.normalized);
                             break;
                     }
                 }

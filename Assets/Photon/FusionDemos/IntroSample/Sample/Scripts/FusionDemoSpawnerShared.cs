@@ -42,7 +42,7 @@ namespace FusionDemo {
       }
 
       void OnBeforeSpawned(NetworkRunner runner, NetworkObject o) {
-        o.GetBehaviour<PlayerUsernameLabel>().SetUsernameLabel(username);
+        o.GetBehaviour<PlayerUsername>().SetUsernameLabel(username);
       }
       
       // register the player object

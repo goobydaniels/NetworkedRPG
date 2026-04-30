@@ -10,11 +10,11 @@ namespace FusionDemo
     [RequireComponent(typeof(NetworkCharacterController))]
     public class PlayerMovementShared : NetworkBehaviour
     {
-        private NetworkCharacterController _cc;
+        private NetworkCharacterController cc;
 
         public override void Spawned() {
             // get the NetworkCharacterController reference
-            _cc = GetBehaviour<NetworkCharacterController>();
+            cc = GetBehaviour<NetworkCharacterController>();
         }
 
         public override void FixedUpdateNetwork() {
@@ -23,7 +23,7 @@ namespace FusionDemo
             if (BattleStateManager.singleton.state == BattleStateManager.BattleState.NOT_IN_BATTLE)
             {
                 // Overworld movement
-                _cc.Move(dir.normalized);
+                cc.Move(dir.normalized);
             }
             else
             {
@@ -36,11 +36,11 @@ namespace FusionDemo
 
                     case BattleStateManager.BattleState.PLAYER2_TURN:
                         // Should be for menu navigation
-                        _cc.Move(dir.normalized);
+                        cc.Move(dir.normalized);
                         break;
 
                     case BattleStateManager.BattleState.ENEMY_TURN:
-                        _cc.Move(dir.normalized);
+                        cc.Move(dir.normalized);
                         break;
                 }
             }

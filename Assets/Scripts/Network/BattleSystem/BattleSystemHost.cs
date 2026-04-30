@@ -9,13 +9,15 @@ namespace FusionDemo
         [Networked, OnChangedRender(nameof(OnTurnChanged))]
         public PlayerRef CurrentTurnPlayer { get; set; }
 
+        [SerializeField] private string currentPlayerName;
+
         // Use [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)] to send actions from client to server/host
         // [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
 
         void IAfterSpawned.AfterSpawned()
         {
             // Now safe — everything is spawned
-            CurrentTurnPlayer = Runner.LocalPlayer;
+            UpdatePlayer();
         }
 
         public void OnBattleStart()
@@ -31,7 +33,7 @@ namespace FusionDemo
 
             BattleStateManager.singleton.SetBattleState(BattleStateManager.BattleState.IN_BATTLE);
 
-            CurrentTurnPlayer = Runner.LocalPlayer;
+            UpdatePlayer();
         }
 
         // Called when the turn should be advanced to the next in line and updates the current turn player
@@ -78,6 +80,11 @@ namespace FusionDemo
         void EndBattle()
         {
             BattleStateManager.singleton.SetBattleState(BattleStateManager.BattleState.END);
+        }
+
+        public void UpdatePlayer() {
+            CurrentTurnPlayer = Runner.LocalPlayer;
+            currentPlayerName = Runner.GetPlayerObject(CurrentTurnPlayer).GetComponent<PlayerUsername>().GetUsername();
         }
     }
 }

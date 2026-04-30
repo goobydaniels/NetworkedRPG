@@ -334,6 +334,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 536639310518699610, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: '_availableHostModeAvatars.Array.data[0].RawGuidValue.Array.data[0]'
+      value: 316766968990792250
+      objectReference: {fileID: 0}
+    - target: {fileID: 536639310518699610, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: '_availableHostModeAvatars.Array.data[0].RawGuidValue.Array.data[1]'
+      value: -320286832477779176
+      objectReference: {fileID: 0}
+    - target: {fileID: 536639310518699610, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: '_availableHostModeAvatars.Array.data[1].RawGuidValue.Array.data[0]'
+      value: 8410982600082508719
+      objectReference: {fileID: 0}
+    - target: {fileID: 536639310518699610, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: '_availableHostModeAvatars.Array.data[1].RawGuidValue.Array.data[1]'
+      value: 6033261705917290104
+      objectReference: {fileID: 0}
+    - target: {fileID: 536639310518699610, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: '_availableHostModeAvatars.Array.data[2].RawGuidValue.Array.data[0]'
+      value: -8868020537294796075
+      objectReference: {fileID: 0}
+    - target: {fileID: 536639310518699610, guid: 86b288cc771df29419058b735f4648c6, type: 3}
+      propertyPath: '_availableHostModeAvatars.Array.data[2].RawGuidValue.Array.data[1]'
+      value: -6993126492029659157
+      objectReference: {fileID: 0}
     - target: {fileID: 647651301257576103, guid: 86b288cc771df29419058b735f4648c6, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542

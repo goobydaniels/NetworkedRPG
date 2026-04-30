@@ -52,7 +52,7 @@ namespace FusionDemo {
             return;
 
             void OnBeforeSpawned(NetworkRunner runner, NetworkObject o) {
-                o.GetBehaviour<PlayerUsernameLabel>().SetUsernameLabel(username);
+                o.GetBehaviour<PlayerUsername>().SetUsernameLabel(username);
             }
         }
 
