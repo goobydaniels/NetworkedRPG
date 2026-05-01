@@ -5,7 +5,7 @@ using static ItemDatabase;
 
 public class Inventory : NetworkBehaviour {
     [Networked, Capacity(4), UnitySerializeField]
-    private NetworkArray<int> Items { get; set; }
+    private NetworkArray<int> Items => default;
 
     public override void Spawned() {
         if (Object.HasInputAuthority) {
@@ -78,9 +78,5 @@ public class Inventory : NetworkBehaviour {
         }
         Debug.LogWarning("Slot is already empty OR inventory isn't big enough");
         return -1;
-    }
-
-    public void SetInventory(NetworkArray<int> items) {
-        Items = items; 
     }
 }
