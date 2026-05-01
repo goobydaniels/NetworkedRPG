@@ -1,10 +1,17 @@
 using Fusion;
+using System.Linq;
 using UnityEngine;
 using static ItemDatabase;
 
 public class Inventory : NetworkBehaviour {
     [Networked, Capacity(4), UnitySerializeField]
-    private NetworkArray<int> Items => default;
+    private NetworkArray<int> Items { get; set; }
+
+    public override void Spawned() {
+        if (Object.HasInputAuthority) {
+            Debug.Log($"Inventory loaded with items: {string.Join(",", Items.Select(x => x.ToString()))}");
+        }
+    }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_AddItem(WorldItem item) {
@@ -53,7 +60,7 @@ public class Inventory : NetworkBehaviour {
         if (HasStateAuthority) {
             for (int i = 0; i < Items.Length; i++) {
                 if (Items[i] == id) {
-                    Items.Set(id, -1);
+                    Items.Set(i, 0);
                     return i;
                 }
             }
@@ -71,5 +78,9 @@ public class Inventory : NetworkBehaviour {
         }
         Debug.LogWarning("Slot is already empty OR inventory isn't big enough");
         return -1;
+    }
+
+    public void SetInventory(NetworkArray<int> items) {
+        Items = items; 
     }
 }
