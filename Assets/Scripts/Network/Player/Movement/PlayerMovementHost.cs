@@ -30,24 +30,15 @@ namespace FusionDemo {
                 }
                 else
                 {
-                    // In battle movement, should move menus
-                    switch (BattleStateManager.singleton.state)
+                    if (BattleStateManager.singleton.state != BattleStateManager.BattleState.ENEMY_TURN)
                     {
-                        case BattleStateManager.BattleState.PLAYER1_TURN:
-                            // Should be for menu navigation
-                            cc.Move(input.moveDirection.normalized);
-                            break;
-
-                        case BattleStateManager.BattleState.PLAYER2_TURN:
-                            // Do nothing because its not the clients turn and the enemy is not attacking
-                            break;
-
-                        case BattleStateManager.BattleState.ENEMY_TURN:
-                            cc.Move(input.moveDirection.normalized);
-                            break;
+                        cc.Move(input.moveDirection.normalized);
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
-
                 // Store the current buttons to use them on the next FUN (FixedUpdateNetwork) call
                 NetworkButtons = input.buttons;
             }
