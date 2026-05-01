@@ -30,16 +30,19 @@ namespace FusionDemo
                 {
                     if (BattleStateManager.singleton.state == BattleStateManager.BattleState.NOT_IN_BATTLE)
                     {
+                        // If not in battle let the player jump
                         _cc.Jump(false);
                     }
                     else
                     {
                         if (BattleStateManager.singleton.state != BattleStateManager.BattleState.ENEMY_TURN)
                         {
+                            // Set battle state to enemy turn
                             BattleStateManager.singleton.SetBattleState(BattleStateManager.BattleState.ENEMY_TURN);
                         }
                         else
                         {
+                            // Set battle state to player turn
                             BattleStateManager.singleton.SetBattleState(BattleStateManager.BattleState.PLAYER1_TURN);
                         }
                     }

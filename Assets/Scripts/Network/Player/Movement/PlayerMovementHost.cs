@@ -32,10 +32,12 @@ namespace FusionDemo {
                 {
                     if (BattleStateManager.singleton.state != BattleStateManager.BattleState.ENEMY_TURN)
                     {
+                        // Player is allowed to move since it is their turn
                         cc.Move(input.moveDirection.normalized);
                     }
                     else
                     {
+                        // Not player's turn so movement is disabled
                         return;
                     }
                 }
