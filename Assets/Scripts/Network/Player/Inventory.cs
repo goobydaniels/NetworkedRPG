@@ -3,35 +3,32 @@ using UnityEngine;
 using static ItemDatabase;
 
 public class Inventory : NetworkBehaviour {
-    [Networked, Capacity(4)] private NetworkArray<int> Items => default;
+    [Networked, Capacity(4), UnitySerializeField]
+    private NetworkArray<int> Items => default;
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_AddItem(WorldItem item) {
-        //items.Add(item.GetItem());
-    }
-
-    [ContextMenu("Debugging Use Item")]
-    public void UseItem(/*int slot*/) {
-        RPC_UseItem(0);
+        var itemID = ItemDataBase.GetItemID(item.GetItem());
+        AddItem(itemID);
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_UseItem(int slot) {
-        //if (slot < 0 || slot >= items.Count) return;
+        if (slot < 0 || slot >= Items.Length) return;
 
-        //Item item = items[slot];
+        Item item = GetItemAt(slot);
 
-        //if (item is Item<PotionInstance> potion) {
-        //    var instance = potion.GetInstance();
-        //    if (instance.Use(Runner, Object, 1)) {
-        //        items.Remove(item);
-        //    }
-        //}
+        if (item is Item<PotionInstance> potion) {
+            var instance = potion.GetInstance();
+            if (instance.Use(Runner, Object, 1)) {
+                RemoveItemBySlot(slot);
+            }
+        }
 
-        //if (item is Item<SwordInstance> sword) {
-        //    var instance = sword.GetInstance();
-        //    //instance.Use(Runner, Object);
-        //}
+        if (item is Item<SwordInstance> sword) {
+            var instance = sword.GetInstance();
+            //instance.Use(Runner, Object);
+        }
     }
 
     public Item GetItemAt(int slot) {
@@ -44,31 +41,35 @@ public class Inventory : NetworkBehaviour {
             for (int i = 0; i < Items.Length; i++) {
                 if (Items[i] == 0) {
                     Items.Set(i, id);
+                    Debug.Log("Added item at slot #" + i);
                     return;
                 }
             }
         }
+        Debug.LogWarning("Failed to add item to inventory");
     }
 
-    public void RemoveItemByID(int id) {
+    public int RemoveItemByID(int id) {
         if (HasStateAuthority) {
             for (int i = 0; i < Items.Length; i++) {
                 if (Items[i] == id) {
-                    Items.Set(id, 0);
-                    return;
+                    Items.Set(id, -1);
+                    return i;
                 }
             }
-            Debug.LogWarning("Item ID does not exist within inventory");
         }
+        Debug.LogWarning("Item ID does not exist within inventory");
+        return -1;
     }
 
-    public void RemoveItemBySlot(int slot) {
+    public int RemoveItemBySlot(int slot) {
         if (HasStateAuthority) {
             if (Items[slot] > 0 && Items.Length >= slot) {
                 Items.Set(slot, 0);
-                return;
+                return slot ;
             }
-            Debug.LogWarning("Slot is already empty OR inventory isn't big enough");
         }
+        Debug.LogWarning("Slot is already empty OR inventory isn't big enough");
+        return -1;
     }
 }

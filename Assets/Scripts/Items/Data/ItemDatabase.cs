@@ -9,6 +9,9 @@ public class ItemDatabase : ScriptableObject {
         get {
             if (singleton == null) {
                 singleton = Resources.Load<ItemDatabase>("ItemDatabase");
+                if (singleton == null) {
+                    Debug.LogError("Critical: ItemDatabase not found at Resources/ItemDatabase!");
+                }
             }
             return singleton;
         }
@@ -20,12 +23,24 @@ public class ItemDatabase : ScriptableObject {
     [SerializeField] private int tempID;
 
     public void Init() {
+        Items ??= new();
         itemLookup = Items.ToDictionary(item => item.id, item => item);
     }
 
     public Item GetItem(int id) {
         if (itemLookup == null) { Init(); }
         return itemLookup.TryGetValue(id, out var item) ? item : null;
+    }
+
+    public int GetItemID(Item item) {
+        if (itemLookup == null) { Init(); }
+
+        foreach (var entry in itemLookup) {
+            if (entry.Value.Equals(item)) {
+                return entry.Key;
+            }
+        }
+        return -1;
     }
 
     [ContextMenu("Debugging, Get Item At Slot")]

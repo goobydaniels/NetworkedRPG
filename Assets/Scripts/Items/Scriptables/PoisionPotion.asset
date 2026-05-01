@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0c65cb0c21ee249ae81685d0fb0abb, type: 3}
   m_Name: PoisionPotion
   m_EditorClassIdentifier: Assembly-CSharp::PotionItem
+  id: 2
   itemName: Poision Potion
   type: 3
   rarity: 2
-  quantity: 1
+  quantity: 0
   maxQuantity: 1
   icon: {fileID: 0}
   model: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

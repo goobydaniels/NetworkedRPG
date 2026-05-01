@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef111a99bcae6f842a9067c82f7d92dc, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::SwordItem
+  id: 1
   itemName: Greatsword
   type: 4
   rarity: 0
